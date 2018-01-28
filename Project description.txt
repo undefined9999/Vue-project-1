@@ -1,0 +1,38 @@
+ 
+   执行git clone https://github.com/wuxin1210/Vue-project-1.git 
+
+1> 执行 npm/cnpm install 			     安装所有组件
+2> 执行 cnpm install vuex --save      	     安装vuex所需要组件
+3> 执行 cnpm install axios --save            安装axios组件
+4> 执行 cnpm install vue-router --save	     安装router组件
+5> 执行 cnpm install mint-ui --save    	     安装mint-ui组件
+6> 执行 cnpm install node-sass sass-loader --save    安装sass编译的组件
+
+参考文档
+1> https://cn.vuejs.org/v2/guide/   		 vueApi官网
+2> http://mint-ui.github.io/docs/#/zh-cn2/lazyload    muit-ui Api
+3> http://lbsyun.baidu.com/jsdemo.htm#a1_2          百度地图库
+4> https://github.com/vuejs/vue-router              vue-router Api
+5> https://vuex.vuejs.org/zh-cn/ 			vuex API
+6> https://www.npmjs.com/  		         npm第三方组件
+7> http://zeptojs.com/#download  		zeptojs移动端jq
+8> https://www.npmjs.com/package/json-server    json-server 模拟数据
+
+编写规则
+1> css样式使用sass规范编写
+2> 使用zepto 库
+3> 动画效果使用mint-ui
+4> 注意router配置
+
+每天需要和组长汇报进度。
+
+代码管理必须使用git，每天每人至少上传两次。
+
+上传之前要求设置自己的用户名再行提交
+每次上传时要求创建以自己名字命名的分支,上传到分支,不允许动主分支master
+
+
+路由
+vuex 组件间数据共享
+使用一部分mint-ui功能
+布局必须rem
