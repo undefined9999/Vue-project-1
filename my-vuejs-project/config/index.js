@@ -10,38 +10,12 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-//  http://m.lizi.com/newIndex/getIndexNavigator?_=1517127693872
-    proxyTable: {
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    	        '/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'http://www.dinghuapai.cn', //目标服务器
-            changeOrigin: true, //开启代理
-=======
-    	        '/upload': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'http://www.dinghuapai.cn', //目标服务器
-            changeOrigin: true, //开启代理
-            pathRewrite: { '^/upload': '/upload' }  //对访问路径进行替换操作
-        }
-    },
 		 proxyTable: {
->>>>>>> 2cc9afdfacb01c1e456fe4d8e67b7f16f2b6e927
     	        '/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
             target: 'http://www.dinghuapai.cn', //目标服务器
             changeOrigin: true, //开启代理
->>>>>>> wuxin
             pathRewrite: { '^/api': '/api' }  //对访问路径进行替换操作
         },
-
-//								http://www.dinghuapai.cn/api/home/index
-			'/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'http://www.dinghuapai.cn', //目标服务器
-            changeOrigin: true, //开启代理
-            pathRewrite: { '^/api': '/api' }  //对访问路径进行替换操作
-			},
 //			http://www.dinghuapai.cn/uploads/images/2017/07/19/1500437100386892.jpeg/
 				'/uploads': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
             target: 'http://www.dinghuapai.cn', //目标服务器
@@ -98,7 +72,7 @@ module.exports = {
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
 
-    // Run the build command with an extra argument to
+    // Run the build command with an ext
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off

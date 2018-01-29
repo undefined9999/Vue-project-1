@@ -6,12 +6,8 @@ import router from './router'
 import store from './vuex' // Vuex的配置文件
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-import Footer from './components/Footer'
-import Carousel from './components/Carousel'
 
 Vue.config.productionTip = false
-Vue.component("common-footer", Footer);
-Vue.component("commom-carousel", Carousel);
 
 Vue.use(MintUI);
 /* eslint-disable no-new */

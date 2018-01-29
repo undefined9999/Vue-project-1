@@ -1,4 +1,5 @@
 <template>
+	<div id="main"> 
 	<header>
 			<!--<div class="loadingDiv" v-if="loading">
 			玩命加载中......
@@ -17,12 +18,15 @@
 	   </router-link>
 		</div>
 	</header>
+	<commom-carousel></commom-carousel>
+	<common-footer></common-footer>
+	</div>
 </template>
 
 <script>
 	import axios from 'axios';
-	
-	
+	import Carousel from '@/components/Carousel'
+   import Footer from '@/components/Footer'
 export default {
   name: 'common-header',
   data () {
@@ -33,7 +37,8 @@ export default {
     }  
   },
   components: {
-  	
+  	'commom-carousel' : Carousel,
+      'common-footer' : Footer
   },
   mounted(){
   	this.getData();
@@ -45,20 +50,12 @@ export default {
 					return;
 				}				
 				this.loading = true;
-				axios.get('/newIndex/getIndexNavigator?_=1517127693872')
-				.then((res)=>{
-					console.log(res);
-					
-					this.arr_films = this.arr_films.concat(res.data.model.list);
-					this.loading = false;
-				})
-			.catch(function (error) {
-					//console.log(error);
-				});
 //				http://www.dinghuapai.cn/api/home/index
 					axios.get('/api/home/index')
 				.then((res)=>{
-					console.log(res);
+//					console.log(res);
+//					this.arr_films = this.arr_films.concat(res.data.model.list);
+					this.loading = false;
 				     })
 				.catch(function (error) {
 						//console.log(error);
@@ -92,9 +89,12 @@ header {
 		     }
 		  .kefu{
 		  	a{
-		  		color:#fff;
+		  		color:#fff;font-size: 12px;
 		  	}
 		  }    
+}
+#main{
+	width:100%;height:100%;display: flex;flex-direction: column;
 }
 .loadingDiv {
 		position: fixed;
