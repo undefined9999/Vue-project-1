@@ -7,7 +7,7 @@
 4> 执行 cnpm install vue-router --save	     安装router组件
 5> 执行 cnpm install mint-ui --save    	     安装mint-ui组件
 6> 执行 cnpm install node-sass sass-loader --save    安装sass编译的组件
-
+        cnpm install vuex axios vue-router mint-ui node-sass sass-loader --save
 参考文档
 1> https://cn.vuejs.org/v2/guide/   		 vueApi官网
 2> http://mint-ui.github.io/docs/#/zh-cn2/lazyload    muit-ui Api
