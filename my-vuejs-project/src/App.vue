@@ -1,20 +1,21 @@
 <template>
   <div id="app">
-  	<common-header></common-header>	
+  	
     <router-view/>
-    <common-footer></common-footer>
-    
+   
+   	<detail></detail>
   </div>
 </template>
 
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
 <script>
+	import Detail from '@/components/Detail_page1'
 	import { Toast } from 'mint-ui';
 	import axios from 'axios'; 
   export default {
   name: 'App',
   components: {
-  	
+  		Detail
   }
 }
 </script>
