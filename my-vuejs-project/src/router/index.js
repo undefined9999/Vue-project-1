@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-<<<<<<< HEAD
 
 import Detail from '@/components/Detail_page1'
-=======
+
 import HelloWorld from '@/components/HelloWorld'
 import Carousel from '@/components/Carousel'
 
