@@ -16,6 +16,11 @@ export default new Router({
       path: '/index', 
       name: 'Carousel',
       component: Carousel
+  },
+  		{
+      path: '/index', 
+      name: 'Carousel',
+      component: Carousel
   }
   ]
 })
