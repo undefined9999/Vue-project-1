@@ -1,9 +1,38 @@
 <template>
-	<div class="detail">
-		<template v-if="detail">
-			 <h2>好好</h2>
-		</template>
-	</div>
+	<footer>
+		<ul>
+			<li>
+				<router-link to="">
+					<i class="iconfont icon-shouye"></i>
+					<span>首页</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="">
+					<i class="iconfont icon-fenlei"></i>
+					<span>分类</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="">
+					<i class="iconfont icon-liaotian"></i>
+					<span>丽子圈</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="">
+					<i class="iconfont icon-iconset0316"></i>
+					<span>购物车</span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="">
+					<i class="iconfont icon-home"></i>
+					<span>我的</span>
+				</router-link>
+			</li>
+		</ul>
+	</footer>
 </template>
 
 <script>
@@ -22,5 +51,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
-	
+	footer{
+		display:flex;background:#fff;width:100%;height:44px;box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+		 ul{
+		 	display: flex;justify-content: space-around;height:100%;width:100%;
+			li{
+				display:flex;justify-content: space-around;width:20%;
+				height:100%;
+				a{
+					display:flex;float:left;height:40px;
+					justify-content: space-around;
+					flex-direction: column;
+					align-items: center;
+					i{
+						padding-bottom:3px;font-size:20px;
+					}
+				}
+				
+			}
+		 }
+	}
 </style>

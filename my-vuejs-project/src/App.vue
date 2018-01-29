@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-  	<common-header></common-header>	
     <router-view/>
+    <commom-carousel></commom-carousel>
     <common-footer></common-footer>
     
   </div>
@@ -9,25 +9,24 @@
 
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
 <script>
+	  var rempx = document.documentElement.clientWidth / 4.2;
+		document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";
 	import { Toast } from 'mint-ui';
 	import axios from 'axios'; 
   export default {
   name: 'App',
   components: {
-  	
+  
   }
 }
 </script>
 
 <style>
 	@import './assets/css/reset.css';
-	/*@import './assets/css/iconfont/iconfont.css';*/	
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	@import './assets/css/iconfont/iconfont.css';	
+
+html{height: 100%;}
+body{display: flex;flex-direction: column;height:100%;}
+#app{display: flex;flex-direction: column;height:100%;}
+
 </style>

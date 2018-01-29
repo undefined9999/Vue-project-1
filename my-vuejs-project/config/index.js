@@ -10,12 +10,20 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+//  http://m.lizi.com/newIndex/getIndexNavigator?_=1517127693872
     proxyTable: {
-    	        '/v4': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'https://m.maizuo.com', //目标服务器
+//								http://www.dinghuapai.cn/api/home/index
+			'/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
+            target: 'http://www.dinghuapai.cn', //目标服务器
             changeOrigin: true, //开启代理
-            pathRewrite: { '^/v4': '/v4' }  //对访问路径进行替换操作
-        }
+            pathRewrite: { '^/api': '/api' }  //对访问路径进行替换操作
+			},
+//			http://www.dinghuapai.cn/uploads/images/2017/07/19/1500437100386892.jpeg/
+				'/uploads': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
+            target: 'http://www.dinghuapai.cn', //目标服务器
+            changeOrigin: true, //开启代理
+            pathRewrite: { '^/uploads': '/uploads' }  //对访问路径进行替换操作
+			}
     },
 
     // Various Dev Server settings
