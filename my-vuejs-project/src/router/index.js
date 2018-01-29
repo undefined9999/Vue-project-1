@@ -15,12 +15,10 @@ import Header from '@/components/Header'
 
 import Detail from '@/components/Detail_page1'
 
->>>>>>> 6b8cfdd41f8eb9f67f2e0c745643b532225ce4b9
 Vue.use(Router)
 
 export default new Router({
   routes: [
-<<<<<<< HEAD
 
 		{
 
@@ -28,7 +26,7 @@ export default new Router({
       name: 'Detail',
       component: Detail
   }
-=======
+
    
   	{
 
@@ -37,9 +35,5 @@ export default new Router({
       component: List1
 
 		},
-
-
-
->>>>>>> 6b8cfdd41f8eb9f67f2e0c745643b532225ce4b9
   ]
 }) 
