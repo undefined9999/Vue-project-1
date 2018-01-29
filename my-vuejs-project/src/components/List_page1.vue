@@ -2,15 +2,12 @@
 	<div class="page1">
 		<header>
 			<div class="top">
-				<span class="iconfont">
-					dsd
+				<span class="iconfont icon-fangdajing">
 				</span>
 				<input type="text" name="" id="" value="请输入关键字" placeholder="请输入关键字"/>
-				
 			</div>
-			<div class="iconfont ">
-					sd
-				</div>
+			<div class="iconfont icon-iconset0316">	
+			</div>
 		</header>
 		<section></section>
 		<footer></footer>

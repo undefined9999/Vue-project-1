@@ -12,8 +12,6 @@ module.exports = {
     assetsPublicPath: '/',
 //  http://m.lizi.com/newIndex/getIndexNavigator?_=1517127693872
 		 proxyTable: {
-    	        
-
 //								http://www.dinghuapai.cn/api/home/index
 			'/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
             target: 'http://www.dinghuapai.cn', //目标服务器
