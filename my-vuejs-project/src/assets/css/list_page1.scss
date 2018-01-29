@@ -1,0 +1,28 @@
+body, html {
+  width: 100%;
+  height: 100%;
+}
+.page1{
+    display: flex; flex-direction: column;width: 100%; height: 100%; 
+// header
+    header{
+        height: 0.5rem; background: #ca0e25; position: fixed; left: 0; top: 0; width: 100%; display: flex; align-items: center;justify-content: space-around;
+        .top{
+            width: 3.55rem; height: 0.3rem; background: #d85565;border-radius: 1rem; display: flex; line-height: 0.3rem;
+            input{
+                 color: #f4d0d6;  border: none; width: 3rem;line-height: 0.3rem; margin-left: 5px; font-size: 12px;background: #d85565;
+            }
+        }    
+    }
+    
+    
+    
+    //section
+    section{
+        flex: 1; background: #ff0;
+    }
+    // footer
+    footer{
+        height: 0.5rem; background: #55A532;
+    }
+}

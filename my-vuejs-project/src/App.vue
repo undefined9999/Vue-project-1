@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-  	<common-header></common-header>	
-    <router-view/>
-    <common-footer></common-footer>
+
+    <router-view class="dpp"/>
+
     
   </div>
 </template>
@@ -11,23 +11,27 @@
 <script>
 	import { Toast } from 'mint-ui';
 	import axios from 'axios'; 
+	import Page1 from './components/list_page1';
   export default {
   name: 'App',
   components: {
-  	
+  	Page1
   }
 }
 </script>
 
 <style>
+	
 	@import './assets/css/reset.css';
 	/*@import './assets/css/iconfont/iconfont.css';*/	
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app{
+	display: flex; flex-direction: column; width: 100%; height: 100%;
+}
+.dpp{
+	width: 100%; height: 100%; display: flex;
+}
+body, html {
+  width: 100%;
+  height: 100%;
 }
 </style>
