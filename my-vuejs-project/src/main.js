@@ -8,7 +8,9 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import Footer from './components/Footer'
 import Carousel from './components/Carousel'
+import { InfiniteScroll } from 'mint-ui';
 
+Vue.use(InfiniteScroll);
 Vue.config.productionTip = false
 Vue.component("common-footer", Footer);
 Vue.component("commom-carousel", Carousel);

@@ -12,27 +12,10 @@ module.exports = {
     assetsPublicPath: '/',
 //  http://m.lizi.com/newIndex/getIndexNavigator?_=1517127693872
     proxyTable: {
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
     	        '/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
             target: 'http://www.dinghuapai.cn', //目标服务器
             changeOrigin: true, //开启代理
-=======
-    	        '/upload': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'http://www.dinghuapai.cn', //目标服务器
-            changeOrigin: true, //开启代理
-            pathRewrite: { '^/upload': '/upload' }  //对访问路径进行替换操作
-        }
-    },
-		 proxyTable: {
->>>>>>> 2cc9afdfacb01c1e456fe4d8e67b7f16f2b6e927
-    	        '/api': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
-            target: 'http://www.dinghuapai.cn', //目标服务器
-            changeOrigin: true, //开启代理
->>>>>>> wuxin
             pathRewrite: { '^/api': '/api' }  //对访问路径进行替换操作
         },
 
@@ -50,6 +33,7 @@ module.exports = {
 			}
 
     },
+
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
