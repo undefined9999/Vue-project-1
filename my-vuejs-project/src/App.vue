@@ -6,6 +6,7 @@
 </template>
 
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
+
 <script>
 	import Detail from '@/components/Detail_page1'
    	import Page1 from './components/list_page1';

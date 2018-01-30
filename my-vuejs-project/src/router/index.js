@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Header from '@/components/Header'
 import List1 from '@/components/list_page1'
 import List2 from '@/components/list_page2'
 import Detail from '@/components/Detail_page1'
@@ -9,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [  
    	{
-      path: '/', 
+      path: '/index', 
       name: 'Header',
       component: Header
 
