@@ -1,22 +1,16 @@
 <template>
 	<footer>
-		<ul>
+		<ul id="foot">
 			<li>
-				<router-link to="">
+				<router-link to="/index">
 					<i class="iconfont icon-shouye"></i>
 					<span>首页</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/list1">
 					<i class="iconfont icon-fenlei"></i>
 					<span>分类</span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<i class="iconfont icon-liaotian"></i>
-					<span>丽子圈</span>
 				</router-link>
 			</li>
 			<li>
@@ -26,7 +20,7 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/login">
 					<i class="iconfont icon-home"></i>
 					<span>我的</span>
 				</router-link>
@@ -56,10 +50,10 @@ export default {
 		 ul{
 		 	display: flex;justify-content: space-around;height:100%;width:100%;
 			li{
-				display:flex;justify-content: space-around;width:20%;
+				display:flex;justify-content: space-around;width:25%;
 				height:100%;
 				a{
-					display:flex;float:left;height:40px;
+					display:flex;height:40px;
 					justify-content: space-around;
 					flex-direction: column;
 					align-items: center;

@@ -12,6 +12,12 @@
 	<carousel-list3></carousel-list3>
 	<carousel-list4></carousel-list4>
 	<carousel-list5></carousel-list5>
+	<carousel-list6></carousel-list6>
+	<carousel-list7></carousel-list7>
+			<aside>
+				<p class="iconfont icon-QQ"></p>
+				<p class="iconfont icon-icon-test-copy"></p>
+			</aside>
 </main>
 </template>
 
@@ -22,6 +28,8 @@ import Carousel_list1 from '@/components/Carousel_list1'
  import Carousel_list3 from '@/components/Carousel_list3'
   import Carousel_list4 from '@/components/Carousel_list4'
   import Carousel_list5 from '@/components/Carousel_list5'
+  import Carousel_list6 from '@/components/Carousel_list6'
+    import Carousel_list7 from '@/components/Carousel_list7'
   
 export default {
   name: 'commom-carousel',
@@ -35,7 +43,9 @@ export default {
 'carousel-list2' : Carousel_list2,
 'carousel-list3' : Carousel_list3,
 'carousel-list4' : Carousel_list4,
-'carousel-list5' : Carousel_list5
+'carousel-list5' : Carousel_list5,
+'carousel-list6' : Carousel_list6,
+'carousel-list7' : Carousel_list7
   },
     mounted () {
 			axios.get('/api/home/index')
@@ -69,5 +79,12 @@ export default {
           height: 100%;width: 100%;
 		}	
      }
-     
+     aside{
+            p:nth-of-type(1){
+                position: fixed; bottom: 1rem; font-size: 0.45rem; right: 0.1rem; color: #0086B3;
+            }
+            p:nth-of-type(2){
+                position: fixed; bottom: 0.6rem; font-size: 0.4rem; right: 0.13rem; color: #DF5000;
+            }
+        }
 </style>

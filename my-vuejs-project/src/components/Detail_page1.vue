@@ -176,8 +176,8 @@
 	import axios from 'axios';
 	import { TabContainer, TabContainerItem } from 'mint-ui';
 
-Vue.component(TabContainer.name, TabContainer);
-Vue.component(TabContainerItem.name, TabContainerItem);
+/*Vue.component(TabContainer.name, TabContainer);
+Vue.component(TabContainerItem.name, TabContainerItem);*/
 	export default {
 		name: "Detail-page1",
 		data: function() {

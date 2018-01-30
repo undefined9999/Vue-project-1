@@ -5,11 +5,26 @@
 				<router-link to="">
                         <div class="tit">{{item.name}}</div>
                         <div class="figure">
-                            <img v-lazy.container="item.index_img" alt="" />
+        <img v-lazy.container="item.index_img" alt="" />
                         </div>
-                   </router-link>              
+                </router-link>              
             </div>
-                 
+            <div class="col col-count">
+                <router-link to="">
+                    <div class="figure">
+           <img v-lazy.container="arr_top2.img" alt="" />
+                    </div>
+                    <div class="info">
+                        <div class="name">
+                            <div class="ellips">{{arr_top2.title}}</div>
+                        </div>
+                        <div class="price">￥{{arr_top2.special_price}}</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-tip">限时特惠(<span>{{arr_top2.discount}}</span>)折</div>
+                    </div>
+                </router-link>
+            </div>
     	</div>
 	</div>
 </template>
@@ -22,7 +37,7 @@ export default {
   data () {
     return {
       		arr_top: [],
-      		app_top2:{}
+      		arr_top2:""
     }
   },
    components: {
@@ -35,7 +50,7 @@ export default {
 //		console.log(response);
 		this.arr_top = response.data.data.lively2;
 		this.arr_top2 = response.data.data.special;
-//		console.log(this.arr_top2.title)
+//		console.log(this.arr_top2)
 	})
 		.catch(function (error) {
 			//console.log(error);
@@ -50,7 +65,7 @@ export default {
    .index-promo {
     margin-bottom: 10px;overflow: hidden;background-color: #fff;height:152px;width:100%;display:flex;flex-wrap:nowrap;
     .list{
-    	display:flex;flex-wrap:nowrap;justify-content:space-around;
+    	display:flex;flex-wrap:nowrap;justify-content:space-around;width:100%;
 	    .col {
 			    width: 33%;height: 152px;
 			    text-align: center;line-height: 1;border-right: 1px solid #f4f4f4;
@@ -60,4 +75,11 @@ export default {
 		}
 	}
 }	
+.col-count {
+ width:34% !important;
+    border-right: none;
+}
+.bar{
+	background:#ca0e25;color:#fff;
+}
 </style>

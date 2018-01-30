@@ -45,10 +45,10 @@ export default {
   		Indicator.open('加载中...');
   },
   mounted(){  	
+  	$("#foot li:nth-of-type(1) a").css("color","#ca0e25")
   	this.getData();
   },
   	methods: {
-  		
 	  getData() {
 	  
 				// 用逻辑判断防止用户点击多次。
@@ -112,6 +112,4 @@ header {
 		background: rgba(0,0,0,0.5);
 		z-index: 999;
 	}
-
-
 </style>
