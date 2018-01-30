@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <router-view/>  
-   	<detail></detail>
   </div>
 </template>
 
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
 <script>
-	import Detail from '@/components/Detail_page1'
-   	import Page1 from './components/list_page1';
+	
+  import Page1 from './components/list_page1';
   var rempx = document.documentElement.clientWidth / 4.2;
 	document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";
 
@@ -17,7 +16,7 @@ import { Toast } from 'mint-ui';
   export default {
   name: 'App',
   components: {
-  		Detail
+  		
   }
 }
 </script>

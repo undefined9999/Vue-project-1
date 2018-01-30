@@ -24,22 +24,22 @@
 			</div>
 			<div class="main_mid">
 				<p>
-					<a href="javascript:;" class="list_1">
+					<a href="javascript:;" class="list_1" @click="into_mast()" style="background: #ca0e25; color: #fff;">
 						默认
 					</a>
-					<a href="javascript:;" class="list_2">
+					<a href="javascript:;" class="list_1" @click="into_mast()">
 						价格
 						<span class="iconfont icon-jiantou"></span>
 					</a>
-					<a href="javascript:;" class="list_3">
+					<a href="javascript:;" class="list_1" @click="into_mast()">
 						销量
 						<span class="iconfont icon-jiantou"></span>
 					</a>
-					<a href="javascript:;" class="list_4">
+					<a href="javascript:;" class="list_1" @click="into_mast()">
 						最新
 						<span class="iconfont icon-jiantou"></span>
 					</a>
-					<a href="javascript:;" class="list_5">
+					<a href="javascript:;" class="list_1" @click="into_mast()">
 						鲜花分类
 						<span class="iconfont icon-funnel">
 							
@@ -110,7 +110,13 @@ export default {
 	    },
 	    loadBottom() {
 	      
-	    } 
+	    },
+	    into_mast () {
+			$(".list_1").click(function(){
+				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
+				$(this).css("color","#fff").siblings().css("color","#666")
+			})
+	    }
   }
 
 }
