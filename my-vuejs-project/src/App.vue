@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>  
-   	<detail></detail>
+<!--   	<detail></detail>-->
   </div>
 </template>
 

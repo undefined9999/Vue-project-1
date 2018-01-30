@@ -32,10 +32,10 @@ export default {
     mounted () {
 			axios.get('/api/home/index')
 	.then((response) => {
-		console.log(response);
+//		console.log(response);
 		this.arr_top = response.data.data.lively2;
 		this.arr_top2 = response.data.data.special;
-		console.log(this.arr_top2.title)
+//		console.log(this.arr_top2.title)
 	})
 		.catch(function (error) {
 			//console.log(error);
@@ -48,14 +48,16 @@ export default {
 <style scoped lang="scss">
        @import '../assets/css/swiper.min.css';
    .index-promo {
-    margin-bottom: 10px;overflow: hidden;background-color: #fff;height:152px;
-    width:100%;
-    .col {
-		    position: relative;float: left;width: 33%;height: 152px;
-		    text-align: center;line-height: 1;border-right: 1px solid #f4f4f4;
+    margin-bottom: 10px;overflow: hidden;background-color: #fff;height:152px;width:100%;display:flex;flex-wrap:nowrap;
+    .list{
+    	display:flex;flex-wrap:nowrap;justify-content:space-around;
+	    .col {
+			    width: 33%;height: 152px;
+			    text-align: center;line-height: 1;border-right: 1px solid #f4f4f4;
 		    img{
 		    	width:93px;
 		    }
 		}
+	}
 }	
 </style>

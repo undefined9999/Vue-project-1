@@ -1,9 +1,9 @@
 <template>
 	<div id="main"> 
 	<header>
-			<!--<div class="loadingDiv" v-if="loading">
+			<div class="loadingDiv" v-if="loading">
 			玩命加载中......
-			</div>-->
+			</div>
 			<div class="bd">
 				<router-link to="/index">
 				</router-link>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+	import { Indicator } from 'mint-ui';
 	import axios from 'axios';
 	import Carousel from '@/components/Carousel'
    import Footer from '@/components/Footer'
@@ -40,11 +41,16 @@ export default {
   	'commom-carousel' : Carousel,
       'common-footer' : Footer
   },
-  mounted(){
+  beforeMount(){
+  		Indicator.open('加载中...');
+  },
+  mounted(){  	
   	this.getData();
   },
   	methods: {
+  		
 	  getData() {
+	  
 				// 用逻辑判断防止用户点击多次。
 				if(this.loading) {
 					return;
@@ -56,6 +62,7 @@ export default {
 //					console.log(res);
 //					this.arr_films = this.arr_films.concat(res.data.model.list);
 					this.loading = false;
+					 Indicator.close();
 				     })
 				.catch(function (error) {
 						//console.log(error);

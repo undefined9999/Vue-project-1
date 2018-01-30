@@ -6,12 +6,7 @@ import router from './router'
 import store from './vuex' // Vuex的配置文件
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-import Footer from './components/Footer'
-import Carousel from './components/Carousel'
-import { InfiniteScroll } from 'mint-ui';
 
-
-Vue.use(InfiniteScroll);
 Vue.config.productionTip = false
 
 Vue.use(MintUI);
