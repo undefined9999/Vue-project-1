@@ -7,7 +7,7 @@ import List2 from '@/components/list_page2'
 import Login from '@/components/Login'
 import Login2 from '@/components/Login2'
 import Login3 from '@/components/Login3'
-
+import Cart from '@/components/Cart'
 
 
 Vue.use(Router)
@@ -19,7 +19,6 @@ export default new Router({
       path: '/index', 
       name: 'Header',
       component: Header
-
 		},
   	{
       path: '/list1', 
@@ -50,6 +49,11 @@ export default new Router({
       path: '/forget-pass', 
       name: 'Login3',
       component: Login3
+ },
+  {
+      path: '/cart', 
+      name: 'Cart',
+      component: Cart
   }
   ]
 }) 

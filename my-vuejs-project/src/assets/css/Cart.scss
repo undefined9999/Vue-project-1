@@ -1,0 +1,57 @@
+.mui-bar-nav-primary {
+    color: #fff;
+    background-color: #ca0e25;
+}
+.mui-bar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 0.5rem;
+    color: #666;
+    background-color: #fff;
+}
+.mui-bar-nav {
+    top: 0;
+}
+.mui-bar {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 0.5rem;
+    padding-right: 0.1rem;
+    padding-left: 0.1rem;
+    background-color: #f7f7f7;
+    border-bottom: 0;
+    backface-visibility: hidden;
+}
+.mui-bar-nav .back-btn {
+    display: block;
+    padding: 0 0.05rem;
+    margin: 0 0.03rem 0 -0.1rem;
+}
+.mui-bar-nav a {
+    color: inherit;
+}
+.mui-bar-nav-primary .title {
+    color: #fff;
+}
+.mui-bar-nav .title {
+    display: block;
+    width: .1px;
+    flex: 1;
+    font-size: 0.16rem;
+    color: #444;
+}
+.mui-bar-nav .title .center {
+    position: absolute;
+    top: 0;
+    left: 0.6rem;
+    right: 0.6rem;
+    width: auto;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
