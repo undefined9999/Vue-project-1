@@ -10,8 +10,8 @@
 	<carousel-list1></carousel-list1>
 	<carousel-list2></carousel-list2>
 	<carousel-list3></carousel-list3>
-<!--<common-list></common-list>
-<list-main></list-main>-->
+	<carousel-list4></carousel-list4>
+	<carousel-list5></carousel-list5>
 </main>
 </template>
 
@@ -20,6 +20,8 @@
 import Carousel_list1 from '@/components/Carousel_list1'
  import Carousel_list2 from '@/components/Carousel_list2'
  import Carousel_list3 from '@/components/Carousel_list3'
+  import Carousel_list4 from '@/components/Carousel_list4'
+  import Carousel_list5 from '@/components/Carousel_list5'
   
 export default {
   name: 'commom-carousel',
@@ -31,13 +33,16 @@ export default {
    components: {
 'carousel-list1' : Carousel_list1,
 'carousel-list2' : Carousel_list2,
-'carousel-list3' : Carousel_list3
+'carousel-list3' : Carousel_list3,
+'carousel-list4' : Carousel_list4,
+'carousel-list5' : Carousel_list5
   },
     mounted () {
 			axios.get('/api/home/index')
 	.then((response) => {
 //		console.log(response);
 		this.arr_top = response.data.data.ad.items;
+//		console.log(this.arr_top)
 	})
 		.catch(function (error) {
 			//console.log(error);
@@ -49,7 +54,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
        @import '../assets/css/swiper.min.css';
-     main{display: flex;flex: 1;background:#eee;overflow-y: auto;flex-direction: column;}
+     main{flex: 1;background:#eee;overflow-y: auto;flex-direction: column;}
      .Carousel{
      	display:flex;width:100%;height:180px;
      	.Carousel1{

@@ -12,19 +12,12 @@
 			<!--banner-->
 			<div class="banner-out detail-focus" style="margin: 0;">
 				<div class="banner-box">
-<<<<<<< HEAD
-					 <mt-swipe :auto="4000">
-				      <mt-swipe-item v-for="">
-				        <img :src="item" />				       
-				      </mt-swipe-item>
-				    </mt-swipe>
-=======
 					<mt-swipe :auto="4000">
 						<mt-swipe-item v-for="item in list">
 							<img :src="item" style="width: 100%;height: 100%;" />
 						</mt-swipe-item>
 					</mt-swipe>
->>>>>>> b7b56d01ed34652792962a4336d442155e79342d
+
 				</div>
 			</div>
 			<!--scroll-out-->
@@ -79,21 +72,23 @@
 					</div>
 					<!--detail-tabs-box-->
 					<div class="detail-tabs-box">
-						<div class="detail-tabs swiper-pagination-clickable swiper-pagination-bullets">
+						<div class="detail-tabs swiper-pagination-clickable swiper-pagination-bullets">													
 							<span class="item swriper-pagination-bullet swiper-pagination-bullet-active">
-								商品详情
-								<i></i>
-							</span>
+								商品详情								
+							</span>							
+							
 							<span class="item swriper-pagination-bullet ">
-								用户评价
-								<i></i>
+								用户评价								
 							</span>
+																											
 							<span class="item swriper-pagination-bullet ">
-								鲜花问答
-								<i></i>
+								鲜花问答							
 							</span>
 						</div>
+						
+						
 						<!--ui-border-b-->
+			
 						<div class="detail-desc ui-border-b">
 							<div class="detail-stand">
 								<div class="item">
@@ -130,24 +125,59 @@
 								</div>
 							</div>
 						</div>
+					
+				
 						<!--ui-box-rec-->
 						<div class="ui-box ui-box-rec">
+							<div class="rec-hd">也许你还喜欢</div>
+							<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 							
+								<div class="mui-col-xs-6 col" v-for="item in hots">
+									<a href="" class="item" style=" border: 1px solid #CCCCCC;">
+										<img :src ="item.img" style="width: 100%;"/>
+										<div class="cnt">
+											<div class="name" >{{item.title}}</div>
+											<div class="price">
+												￥{{item.price}}
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
 						</div>
 						
 						
 					</div>
+					
+					
+					
+					
 				</div>
 			</div>
 
 		</div>
+			
+			
+		<!--fixed QQ-->
+		<div id="dhp_kefu">
+		<a href="" class="qq" style="background: #5294D0;">
+			<i class="iconfont icon-QQ"></i>
+		</a>
+		<a href="">
+			<i class="iconfont icon-icon-test-copy"></i>
+		</a>
 	</div>
+	</div>
+		
 </template>
 
 <script type="text/javascript" src="../assets/js/zepto.jsv1.2.0.js"></script>
 <script>
 	import axios from 'axios';
-	
+	import { TabContainer, TabContainerItem } from 'mint-ui';
+
+Vue.component(TabContainer.name, TabContainer);
+Vue.component(TabContainerItem.name, TabContainerItem);
 	export default {
 		name: "Detail-page1",
 		data: function() {
@@ -160,7 +190,11 @@
 					"http://www.dinghuapai.cn/uploads/store/06.jpg",
 					"http://www.dinghuapai.cn/uploads/store/07.jpg",
 					"http://www.dinghuapai.cn/uploads/store/09.jpg"
-				]
+				],
+				add_img2:[],
+				add_title:[],
+				add_price:[],
+				hots:[]
 			}
 		},
 		mounted() {
@@ -174,6 +208,12 @@
 					console.log(imgs)
 					this.app_imgs = imgs
 					console.log(typeof this.app_imgs)	
+					console.log( response.data.data.hots[1])
+					for(var i = 0;i<response.data.data.hots.length;i++){
+						this.hots.push(response.data.data.hots[i])
+					}
+						
+					
 					
 				})
 		}
@@ -182,405 +222,7 @@
 
 <style scoped lang="scss">
 	@import '../assets/css/swiper.min.css';
-	.detail-action-bar {
-		display: flex;
-		padding: 0;
-		bottom: 0;
-		height: 0.46rem;
-		line-height: 0.46rem;
-		background-color: #fff;
-		width: 100%;
-	}
+	@import '../assets/css/iconfont/iconfont2.css';
+	@import '../assets/css/Detail_page1.scss';
 	
-	.mui-bar {
-		position: fixed;
-		right: 0;
-		left: 0;
-		z-index: 10;
-		height: 0.5rem;
-		padding-right: 0.1rem;
-		padding-left: 0.1rem;
-		background-color: #f7f7f7;
-		border-bottom: 0;
-		backface-visibility: hidden;
-	}
-	
-	.detail-action-bar .info {
-		display: block;
-		width: .1px;
-		flex: 1;
-		padding: 0 0.1rem;
-		font-size: 0.14rem;
-		color: #444;
-	}
-	
-	.detail-action-bar .info .price {
-		margin-right: 0.05rem;
-		font-size: 0.18rem;
-		color: #f00909;
-	}
-	
-	.detail-action-bar .btn.warning {
-		background-color: #ff9500 !important;
-	}
-	
-	.detail-action-bar .btn {
-		position: relative;
-		z-index: 2;
-		display: block;
-		width: 30%;
-		padding: 0;
-		margin: 0;
-		color: #fff;
-		text-align: center;
-		font-size: 0.14rem;
-	}
-	
-	.detail-action-bar .btn.primary {
-		background-color: #ca0e25 !important;
-	}
-	
-	.detail-action-bar .btn {
-		position: relative;
-		z-index: 2;
-		display: block;
-		width: 30%;
-		padding: 0;
-		margin: 0;
-		color: #fff;
-		text-align: center;
-		font-size: 0.14rem;
-	}
-	
-	.detail-action-bar~.mui-content {
-		padding-bottom: 0.46rem;
-	}
-	
-	.mui-bar-nav~.mui-content {
-		padding-top: 0.5rem;
-	}
-	
-	.banner-box {
-		position: fixed;
-		top: 0.6rem;
-		left: 0;
-		right: 0;
-		height: 4.43rem;
-	}
-	
-	.banner-out {
-		width: 100%;
-		height: 5rem;
-	}
-	/*scroll-out*************************** ***** */
-	
-	.scroll-out {
-		z-index: 1;
-		position: relative;
-		background-color: #fff;
-	}
-	
-	.ui-box {
-		position: relative;
-		background-color: #fff;
-	}
-	
-	.detail-focus .basic-info {
-		position: relative;
-		z-index: 4;
-		padding: 0.1rem 0.1rem 0;
-	}
-	
-	.fl {
-		float: left;
-	}
-	
-	.detail-focus .basic-info .ptit {
-		padding: 0 0 0.1rem;
-		overflow: hidden;
-		font-size: 0.14rem;
-		line-height: 0.2rem;
-		color: #444;
-		max-width: 75%;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	
-	.detail-focus .basic-info .info-row {
-		font-size: 0.13rem;
-		color: #999;
-	}
-	
-	.detail-focus .basic-info .hd {
-		margin-bottom: 0.1rem;
-		line-height: 0.26rem;
-		width: 75%;
-	}
-	
-	.detail-focus .basic-info .hd .rbox {
-		font-size: 0;
-		white-space: nowrap;
-	}
-	
-	.detail-focus .basic-info .price {
-		display: inline-block;
-		color: #f00909;
-		font-size: 0.14rem;
-		vertical-align: middle;
-		margin-right: 0.1rem;
-	}
-	
-	.detail-focus .basic-info .price .num {
-		font-size: 0.2rem;
-		line-height: 0;
-	}
-	
-	.detail-focus .basic-info .only-moblie {
-		display: inline-block;
-		vertical-align: middle;
-		padding: 0 0.05rem;
-		height: 0.2rem;
-		line-height: 0.2rem;
-		font-size: 0.1rem;
-		color: #f67a0c;
-		background-color: #fff4eb;
-		border: 1px solid #f67a0c;
-		border-radius: 0.04rem;
-	}
-	/********************detail-discount*********************/
-	
-	.detail-discount {
-		padding: 0.1rem;
-	}
-	
-	.detail-discount .item {
-		line-height: 0.22rem;
-		color: #8d8d8d;
-		font-size: 0.12rem;
-	}
-	
-	.detail-discount .label {
-		display: inline-block;
-		vertical-align: middle;
-		margin: -1px 0.05rem 0 0;
-		padding: 0 0.05rem;
-		line-height: 0.18rem;
-		color: #fff;
-		background-color: #f67a0c;
-		-webkit-border-radius: 0.04rem;
-		border-radius: 0.04rem;
-	}
-	/******************detail-value**********************/
-	
-	.detail-value {
-		padding: 0.08rem 0.1rem;
-		margin-bottom: 0.1rem;
-		display: flex;
-	}
-	
-	.detail-value .key {
-		font-size: 0.14rem;
-		line-height: 0.28rem;
-		color: #999;
-	}
-	
-	.detail-value .cnt {
-		font-size: 0.14rem;
-		margin-right: -0.08rem;
-		overflow: hidden;
-	}
-	
-	.flex-col {
-		display: block;
-		width: .1px;
-		flex: 1;
-	}
-	
-	.detail-value .mui-numbox {
-		width: 0.6rem;
-		height: 0.28rem;
-		padding: 0 0.3rem;
-	}
-	
-	.mui-numbox {
-		border: solid 0.01rem #bbb;
-		overflow: hidden;
-		display: inline-block;
-		height: 0.35rem;
-		border-radius: 0.03rem;
-		background-color: #efeff4;
-		vertical-align: top;
-		position: relative;
-		padding: 0px 0.4rem 0px 0.4rem;
-		width: 1.2rem;
-		vertical-align: middle;
-	}
-	
-	.detail-value .mui-numbox [class*=btn-numbox] {
-		width: 0.2rem;
-	}
-	
-	.mui-numbox [class*=numbox-btn][disabled],
-	.mui-numbox [class*=btn-numbox][disabled] {
-		color: #c0c0c0;
-	}
-	
-	.mui-numbox .mui-numbox-btn-minus,
-	.mui-numbox .mui-btn-numbox-minus {
-		left: 0px;
-		border-top-left-radius: 0.03rem;
-		border-bottom-left-radius: 0.03rem;
-	}
-	
-	.mui-numbox [class*=numbox-btn],
-	.mui-numbox [class*=btn-numbox] {
-		width: 0.4rem;
-		height: 100%;
-		position: absolute;
-		top: 0px;
-		border: none;
-		border-radius: 0px;
-		font-size: 0.18rem;
-		color: #555;
-		line-height: 100%;
-		font-weight: normal;
-		overflow: hidden;
-		padding: 0px;
-		background-color: #f9f9f9;
-	}
-	
-	.iconfont {
-		font-family: "iconfont" !important;
-		font-size: 16px;
-		font-style: normal;
-	}
-	
-	.detail-value .mui-numbox .mui-input-numbox {
-		font-size: 0.14rem;
-		line-height: 0.26rem;
-	}
-	
-	.mui-numbox .mui-numbox-input,
-	.mui-numbox .mui-input-numbox {
-		width: 100% !important;
-		height: 100%;
-		text-align: center;
-		border: none !important;
-		border-left: solid 1px #ccc !important;
-		border-right: solid 1px #ccc !important;
-		margin: 0px;
-		/* padding: 0px 0.03rem !important;*/
-		display: inline-block;
-		border-radius: 0px !important;
-		text-overflow: ellipsis;
-		word-break: normal;
-		overflow: hidden;
-	}
-	
-	button[disabled],
-	html input[disabled] {
-		cursor: default;
-	}
-	/*******************detail-tabs-box **********************/
-	
-	.detail-tabs-box {
-		height: 46px;
-	}
-	
-	.detail-tabs {
-		position: relative;
-		z-index: 5;
-		display: flex;
-		height: 0.46rem;
-		line-height: 0.46rem;
-		background-color: #fff;
-	}
-	
-	.swiper-pagination-clickable .swiper-pagination-bullet {
-		cursor: pointer;
-	}
-	
-	.detail-tabs .item {
-		position: relative;
-		display: block;
-		width: .1px;
-		flex: 1;
-		width: auto;
-		height: auto;
-		color: #444;
-		font-size: 0.15rem;
-		text-align: center;
-		background: none;
-		cursor: pointer;
-		opacity: 1;
-	}
-	
-	.detail-tabs .swiper-pagination-bullet-active {
-		color: #ca0e25;
-		background: none;
-	}
-	/************************ui-border-b************************/
-	
-	.detail-desc {
-		margin-bottom: 0.1rem;
-		background-color: #fff;
-	}
-	
-	.detail-desc {
-		margin-bottom: 0.1rem;
-		background-color: #fff;
-	}
-	
-	.detail-stand .item {
-		padding: 0.07rem 0;
-		overflow: hidden;
-		line-height: 0.2rem;
-		border-bottom: 0.01rem dotted #ccc;
-	}
-	
-	.detail-stand .item .k {
-		float: left;
-		width: 0.5rem;
-		color: #8a8a8a;
-	}
-	
-	.detail-stand .item .v {
-		margin-left: 0.5rem;
-		color: #444;
-	}
-	
-	.detail-stand {
-		padding: 0.15rem 0.1rem 0.18rem;
-		font-size: 0.12rem;
-	}
-	/***********************pics****************************/
-.detail-desc 
-			{.pics {
-				padding: 0 0.05rem;
-				img{
-					    display: block;
-					   
-					}
-				
-			}
-}	
-.swiper-container-autoheight,
-.swiper-container-autoheight .swiper-slide {
-	height: auto;
-}
-.swiper-slide {
-	flex-shrink: 0;
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-
- #app_images{ 
-		p{
-			max-width:100%;
-		} 
- }
-
 </style>
