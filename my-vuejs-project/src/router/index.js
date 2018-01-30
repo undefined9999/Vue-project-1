@@ -4,7 +4,7 @@ import Header from '@/components/Header'
 import List1 from '@/components/list_page1'
 import List2 from '@/components/list_page2'
 import Detail from '@/components/Detail_page1'
-
+import Cart from '@/components/Cart'
 
 Vue.use(Router)
 
@@ -32,6 +32,12 @@ export default new Router({
       path: '/deatail1', 
       name: 'Detail',
       component: Detail
+  },
+  {
+
+      path: '/cart', 
+      name: 'Cart',
+      component: Cart
   }
   ]
 }) 
