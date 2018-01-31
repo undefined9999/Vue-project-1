@@ -1,9 +1,9 @@
 <template>
 <main>
 	<mt-swipe :auto="4000" class="Carousel" >
-	  <mt-swipe-item v-for="item in arr_top" class="Carousel1">
+	  <mt-swipe-item v-for="item in arr_top" :key="item.id" class="Carousel1">
 	  	<router-link to="">
-	  		<img v-lazy.container="item.pic"/>
+	  		<img v-lazy.container="item.pic" :key="item.id"/>
 	  	</router-link>  	
 	  </mt-swipe-item>
 	</mt-swipe>

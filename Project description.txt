@@ -7,7 +7,10 @@
 4> 执行 cnpm install vue-router --save	     安装router组件
 5> 执行 cnpm install mint-ui --save    	     安装mint-ui组件
 6> 执行 cnpm install node-sass sass-loader --save    安装sass编译的组件
-        cnpm install vuex axios vue-router mint-ui node-sass sass-loader --save
+7> 执行 cnpm install vue-infinite-loading --save
+8> 执行 cnpm install jquery --save
+cnpm install  jquery vuex axios vue-router mint-ui node-sass sass-loader vue-infinite-loading --save
+
 参考文档
 1> https://cn.vuejs.org/v2/guide/   		 vueApi官网
 2> http://mint-ui.github.io/docs/#/zh-cn2/lazyload    muit-ui Api
@@ -30,7 +33,7 @@
 代码管理必须使用git，每天每人至少上传两次。
 
 上传之前要求设置自己的用户名再行提交
-每次上传时要求创建以自己名字命名的分支,上传到分支,不允许动主分支master
+每次上传时要传到wuixn分支,上传到分支,不允许动主分支master
 次日早晨组长合并所有分支调试,没有问题后继续编写
 18.02.01.前必须全部完成.当日做最终调试
 

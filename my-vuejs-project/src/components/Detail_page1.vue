@@ -5,7 +5,10 @@
 				合计：
 				<span id="count-price" class="price">243</span> 元
 			</div>
-			<span class="btn warning">加入购物车</span>
+			
+				<span class="btn warning" @click="addToCart()">加入购物车</span>
+			
+			
 			<a href="javascript:;" class="btn primary">立即购买</a>
 		</div>
 		<div class="mui-content">
@@ -13,8 +16,8 @@
 			<div class="banner-out detail-focus" style="margin: 0;">
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
-						<mt-swipe-item v-for="item in list">
-							<img :src="item" style="width: 100%;height: 100%;" />
+						<mt-swipe-item v-for="item in list" :key="item.id">
+							<img :src="item" style="width: 100%;height: 100%;" :key="item.id"/>
 						</mt-swipe-item>
 					</mt-swipe>
 
@@ -25,10 +28,10 @@
 				<div class="ui-box detail-focus">
 					<div class="basic-info ui-border-t">
 						<div class="mui-clearfix" style="height: 0.3rem;">
-							<div class="ptit fl">岁月静好/19朵粉玫瑰</div>
+							<div class="ptit fl" v-if="cart.detail">{{cart.detail.title}}</div>
 							<div class="info-row fr">
 								编号:
-								<span>12396</span>
+								<span v-if="cart.detail">{{cart.detail.id}}</span>
 							</div>
 						</div>
 						<div class="basic-info-out">
@@ -36,14 +39,14 @@
 								<div class="rbox">
 									<div class="price">
 										<span style="color: #333;display: inline-block;width: 0.57rem;font-size: 0.14rem;">
-											<span>订花派价</span>
+											<span v-if="">{{cart.price_name}}</span>
 										</span>
-										<span class="num" id="itemprice">￥243</span>
+										<span class="num" id="itemprice" v-if="cart.detail">￥{{cart.detail.mobile_price}}</span>
 									</div>
 									<span class="only-moblie">手机专享价</span>
 									<span style="display:inline-block;line-height:26px;font-size:10px;margin-left:3px;vertical-align:middle;color:#f00909;">
 										已省
-										<span>5</span> 元
+										<span v-if="cart.detail">{{cart.detail.lisheng}}</span> 元
 									</span>
 								</div>
 							</div>
@@ -61,11 +64,11 @@
 						<div class="cnt flex-col">
 							<div class="mui-numbox" data-numbox-min="1" data-numbox-max="30">
 								<button class="mui-btn mui-btn-numbox-minus" type="button" disabled style="width: 0.3rem;">
-									<i class="iconfont icon-reduce">-</i>
+									<i class="iconfont icon-reduce" >-</i>
 								</button>
-								<input type="number" value="1" class="mui-input-numbox" disabled style="float: left;" />
+								<input class="mui-input-numbox" disabled style="float: left;width: 0.3rem;" value="1">
 								<button class="mui-btn mui-btn-numbox-plus" type="button" style="float: right;width: 0.3rem;">
-									<i class="iconfont icon-plug">+</i>
+									<i class="iconfont icon-plug" >+</i>
 								</button>
 							</div>
 						</div>
@@ -271,15 +274,7 @@
 					        
 					      </mt-tab-container>  
 					    </div>  
-						
-						
-						
-					
-					
-					
-					
-					
-				
+																																															
 			</div>
 
 		</div>
@@ -302,10 +297,6 @@
 <script>
 	import axios from 'axios';
 	import { TabContainer, TabContainerItem } from 'mint-ui';
-
-/*Vue.component(TabContainer.name, TabContainer);
-Vue.component(TabContainerItem.name, TabContainerItem);*/
-
 	import InfiniteLoading from 'vue-infinite-loading';
 
 	export default {
@@ -329,14 +320,21 @@ Vue.component(TabContainerItem.name, TabContainerItem);*/
 				user_pl:[],
 				page:0,
 				searchBarFixed:false,
+				cart : ' '
 			}
 		},
 		mounted() {
 			this.getData();
-			window.addEventListener('scroll', this.handleScroll);
+			window.addEventListener('scroll', this.handleScroll);			
 			axios.get('/api/product/index?id=12396')			
 				.then((response) => {
 //					console.log(response.data.data.detail.description);
+/*************详情动态信息************/
+					console.log(response.data.data)
+					this.cart = response.data.data;
+//					console.log(this.cart.detail);
+					
+/*********也许你喜欢的列表***********/				
 					this.list = response.data.data.detail.images;
 					this.app_imgs = response.data.data.detail.description;
 					var imgs = response.data.data.detail.description
@@ -347,7 +345,8 @@ Vue.component(TabContainerItem.name, TabContainerItem);*/
 //					console.log( response.data.data.hots[1])
 					for(var i = 0;i<response.data.data.hots.length;i++){
 						this.hots.push(response.data.data.hots[i])
-					}					
+					}
+					
 				})				
 		},
 		 methods: {
@@ -365,28 +364,37 @@ Vue.component(TabContainerItem.name, TabContainerItem);*/
 						this.user_pl.push(response.data.data.comments.data[i])
 					}	
 				
-				})
+				})		
 			},
 		    handleScroll () {
 			  var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-			  console.log(scrollTop)
+//			  console.log(scrollTop)
 			   var offsetTop = document.querySelector('#searchBar').offsetTop;
-			   console.log(offsetTop)
+//			   console.log(offsetTop)
 				if (scrollTop > 660) {
 			 		this.searchBarFixed = true
-			 		console.log(1)
+//			 		console.log(1)
 			 	} else {
 			 		this.searchBarFixed = false
-			 		console.log(2)
+//			 		console.log(2)
 			 	}
 			},
 			destroyed () {
 				window.removeEventListener('scroll', this.handleScroll)
+			}, 
+			addToCart() {
+				var cart = this.cart;
+				// 启动action
+				// dispatch("action的名字")
+				this.$store.dispatch("addToCartA", cart);
+				this.$router.push({path : "/cart"})
 			}
+			
 		  },
 		 components: {
 		    InfiniteLoading,
-		 }
+		 },
+		
 	}
 </script>
 

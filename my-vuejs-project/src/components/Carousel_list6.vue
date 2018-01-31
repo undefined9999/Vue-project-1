@@ -1,56 +1,56 @@
 <template>
-      <div class="ft-service ui-border-t mui-row">
-        <div class="mui-col-xs-6 col col-1">
-        	<span class="ico"></span>
-        	<div class="label">新鲜花材</div>
-        	</div>
+  <div class="ft-service ui-border-t mui-row">
+    <div class="mui-col-xs-6 col col-1">
+    	<span class="ico"></span>
+    	<div class="label">新鲜花材</div>
+		</div>
         <div class="mui-col-xs-6 col col-2">
         	<span class="ico"></span>
         	<div class="label">诚信可靠</div>
         </div>
-        <div class="mui-col-xs-6 col col-3">
-        	<span class="ico"></span>
-        	<div class="label">1-3小时送花</div>
-        </div>
-        <div class="mui-col-xs-6 col col-4">
-        	<span class="ico"></span>
-        	<div class="label">200%退赔承诺</div>
-        </div>
-    </div>
+	        <div class="mui-col-xs-6 col col-3">
+	        	<span class="ico"></span>
+	        	<div class="label">1-3小时送花</div>
+	        </div>
+		        <div class="mui-col-xs-6 col col-4">
+		        	<span class="ico"></span>
+		        	<div class="label">200%退赔承诺</div>
+		        </div>
+	</div>
 </template>
 
 <script>
 	import axios from 'axios';
   
-export default {
-  name: 'carousel-list6',
-  data () {
-    return {
-      		arr_top: []
-    }
-  },
-   components: {
-
-  },
-    mounted () {
-			axios.get('/api/home/index')
-	.then((response) => {
-//		console.log(response);
-		this.arr_top = response.data.data.comments.data;
-//		console.log(this.arr_top)
-//		console.log()
-	})
-		.catch(function (error) {
-			//console.log(error);
-		});
-  }
-}
+	export default {
+	  name: 'carousel-list6',
+	  data () {
+	    return {
+	      		arr_top: []
+	    }
+	  },
+	   components: {
+	
+	  },
+	    mounted () {
+				axios.get('/api/home/index')
+				.then((response) => {
+			//		console.log(response);
+					this.arr_top = response.data.data.comments.data;
+			//		console.log(this.arr_top)
+			//		console.log()
+				})
+			.catch(function (error) {
+				//console.log(error);
+			});
+	  }
+	}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
        @import '../assets/css/swiper.min.css';
- .ft-service {
+.ft-service {
     padding: 5px 10px;background-color: #fff;display:flex;flex-wrap:wrap;
     .col {
 				    text-align: center;padding: 5px 0;width:50%;height:50px;
