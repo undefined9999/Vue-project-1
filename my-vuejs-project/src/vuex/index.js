@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 var state = {
-	username: "默认用户名"
+	username: ""
 }
 
 // 持久化：从本地取出数据

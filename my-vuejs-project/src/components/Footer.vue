@@ -4,7 +4,7 @@
 			<li>
 				<router-link to="/index">
 					<i class="iconfont icon-shouye"></i>
-					<span>首页</span>
+					<span>首页 </span>
 				</router-link>
 			</li>
 			<li>
@@ -19,8 +19,8 @@
 					<span>购物车</span>
 				</router-link>
 			</li>
-			<li>
-				<router-link to="/login">
+			<li @click="myur()">
+				<router-link to="" >
 					<i class="iconfont icon-home"></i>
 					<span>我的</span>
 				</router-link>
@@ -35,11 +35,23 @@ export default {
 	name: "common-footer",
 	data: function() {
 		return {
-			 detail:true
+			 detail:true,
+			 url : ''
+		}
+	},
+	methods:{
+		myur(){
+			var that = this;
+			//console.log(this.$store.state.username.length)
+			if(this.$store.state.username.length){
+				that.$router.push({path : "/login-suss"});
+			}else{
+				that.$router.push({path : "/login"});
+			}
 		}
 	},
 	mounted() {
-	
+ 		
 	}
 }
 </script>

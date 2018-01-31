@@ -13,8 +13,8 @@
 			<div class="banner-out detail-focus" style="margin: 0;">
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
-						<mt-swipe-item v-for="item in list">
-							<img :src="item" style="width: 100%;height: 100%;" />
+						<mt-swipe-item v-for="item in list" :key="item.id">
+							<img :src="item" style="width: 100%;height: 100%;" :key="item.id"/>
 						</mt-swipe-item>
 					</mt-swipe>
 
