@@ -3,16 +3,16 @@
         <div class="list">
         	<div class="col" v-for="item in arr_top">
 				<router-link to="">
-                        <div class="tit">{{item.name}}</div>
+                    <div class="tit">{{item.name}}</div>
                         <div class="figure">
-        <img v-lazy.container="item.index_img" alt="" />
+        					<img v-lazy.container="item.index_img" alt="" />
                         </div>
                 </router-link>              
             </div>
             <div class="col col-count">
                 <router-link to="">
                     <div class="figure">
-           <img v-lazy.container="arr_top2.img" alt="" />
+           				<img v-lazy.container="arr_top2.img" alt="" />
                     </div>
                     <div class="info">
                         <div class="name">
@@ -32,37 +32,36 @@
 <script>
 	import axios from 'axios';
   
-export default {
-  name: 'carousel-list2',
-  data () {
-    return {
-      		arr_top: [],
-      		arr_top2:""
-    }
-  },
-   components: {
-// "common-list" : List,
-// "list-main" : List2
-  },
-    mounted () {
-			axios.get('/api/home/index')
-	.then((response) => {
-//		console.log(response);
-		this.arr_top = response.data.data.lively2;
-		this.arr_top2 = response.data.data.special;
-//		console.log(this.arr_top2)
-	})
-		.catch(function (error) {
-			//console.log(error);
-		});
-  }
-}
+	export default {
+	  name: 'carousel-list2',
+	  data () {
+	    return {
+	      		arr_top: [],
+	      		arr_top2:""
+	    }
+	  },
+	   components: {
+ 
+	  },
+	    mounted () {
+				axios.get('/api/home/index')
+		.then((response) => {
+	//		console.log(response);
+			this.arr_top = response.data.data.lively2;
+			this.arr_top2 = response.data.data.special;
+	//		console.log(this.arr_top2)
+		})
+			.catch(function (error) {
+				//console.log(error);
+			});
+	  }
+	}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
        @import '../assets/css/swiper.min.css';
-   .index-promo {
+.index-promo {
     margin-bottom: 10px;overflow: hidden;background-color: #fff;height:152px;width:100%;display:flex;flex-wrap:nowrap;
     .list{
     	display:flex;flex-wrap:nowrap;justify-content:space-around;width:100%;

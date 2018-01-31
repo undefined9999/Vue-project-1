@@ -19,11 +19,16 @@ module.exports = {
             pathRewrite: { '^/api': '/api' }  //对访问路径进行替换操作
 			},
 //			http://www.dinghuapai.cn/uploads/images/2017/07/19/1500437100386892.jpeg/
-				'/uploads': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
+			'/uploads': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
             target: 'http://www.dinghuapai.cn', //目标服务器
             changeOrigin: true, //开启代理
             pathRewrite: { '^/uploads': '/uploads' }  //对访问路径进行替换操作
-			}
+			},
+            '/login4ajax': {//这里是需要匹配的路径，如果匹配上了，则代理到目标服务器上
+            target: 'http://localhost:3000', //目标服务器
+            changeOrigin: true, //开启代理
+            pathRewrite: { '^/login4ajax': '/api/login4ajax' }  //对访问路径进行替换操作
+            }
     },
 
     // Various Dev Server settings

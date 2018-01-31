@@ -7,6 +7,7 @@ import List2 from '@/components/list_page2'
 import Login from '@/components/Login'
 import Login2 from '@/components/Login2'
 import Login3 from '@/components/Login3'
+import Login4 from '@/components/Login4'
 import Cart from '@/components/Cart'
 
 
@@ -50,7 +51,13 @@ export default new Router({
       name: 'Login3',
       component: Login3
  },
-{
+ {
+      path: '/login-suss', 
+      name: 'Login4',
+      component: Login4
+ },
+  {
+
       path: '/cart', 
       name: 'Cart',
       component: Cart
