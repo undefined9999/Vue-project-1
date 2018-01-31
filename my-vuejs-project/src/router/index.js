@@ -26,7 +26,7 @@ export default new Router({
       component: List1
 		},
 		{
-      path: '/list2', 
+      path: '/list2/:Attr_id/:Id', 
       name: 'List2',
       component: List2
 		},

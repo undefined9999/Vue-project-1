@@ -1,17 +1,17 @@
 <template>
 	<div class="page2">
 		<header>
-			<div class="left_">
+			<router-link to="/list1" class="left_">
 				&lt;
-			</div>
+			</router-link>
 			<div class="top">
 				<span class="iconfont icon-fangdajing">
 				</span>
 				<input type="text" name="" id="" value="请输入关键字" placeholder="请输入关键字"/>
 			</div>
-			<div class="dao_hang">	
+			<a class="dao_hang">	
 				导航
-			</div>
+			</a>
 		</header>
 		<section>
 			<div class="main_top">
@@ -19,7 +19,9 @@
 					当前分类&nbsp;:&nbsp;{{hua.name}}
 				</p>
 				<p>
-					已选择&nbsp;:&nbsp;{{lei.name}} 
+					<span>
+						已选择&nbsp;:&nbsp; 
+					</span>	
 				</p>
 			</div>
 			<div class="main_mid">
@@ -39,7 +41,7 @@
 						最新
 						<span class="iconfont icon-jiantou"></span>
 					</a>
-					<a href="javascript:;" class="list_1" @click="into_mast()">
+					<a href="javascript:;" class="list_1"  @click="hideMenu()">
 						鲜花分类
 						<span class="iconfont icon-funnel">
 							
@@ -67,6 +69,26 @@
 				<p class="iconfont icon-QQ"></p>
 				<p class="iconfont icon-icon-test-copy"></p>
 			</aside>
+			<nav class="menu" :class="{show: showFlag}" @click.self="hideMenu()">
+				<div class="list_tit">					
+					<div class="tit_top">
+						<p>筛选</p>
+					</div>
+					<div class="tit_main">
+						<div class="main_list" v-for="item in items">
+							<p>
+								{{item.name}}
+							</p>
+							<span>
+								全部
+							</span>
+							<span v-for="ite in item.attr_vaues">
+								{{ite.name}}
+							</span>
+						</div>	
+					</div>	
+				</div>
+			</nav>
 		</section>
 	</div>
 </template>
@@ -86,17 +108,29 @@ export default {
 			 hua : "",
 			 lei : "",
 			 list : [],
-			 allLoaded: false
+			 allLoaded: false,
+			 items : [],
+			 list_l : [],
+			 itemss : [],
+			 showFlag : false
 		}
 		
 	},
 	mounted() {
-		axios.get("/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=1023_123&sort=")
+		var Attr_id = this.$route.params.Attr_id;
+		var Id = this.$route.params.Id;
+		axios.get(`/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=${Attr_id}_${Id}&sort=`)
 		.then((res)=>{
 			console.log(res)
 			this.hua = res.data.data.category;
 			this.lei = res.data.data.selected;
-			this.list = res.data.data.goodsList.data
+			this.list = res.data.data.goodsList.data;
+			this.items = res.data.data.attulist;
+		}),
+		axios.get("/api/product/category")
+		.then((res)=>{
+			console.log(res)
+			this.itemss = res.data.data.label;
 		})
 	},
 	methods: {
@@ -116,7 +150,10 @@ export default {
 				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
 				$(this).css("color","#fff").siblings().css("color","#666")
 			})
-	    }
+	    },
+	    hideMenu () {
+			this.showFlag = !this.showFlag;			
+		}
   }
 
 }
