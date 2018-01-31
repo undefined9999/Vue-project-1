@@ -26,12 +26,6 @@ export default new Router({
       path: '/list2', 
       name: 'List2',
       component: List2
-		},
-		{
-
-      path: '/deatail1', 
-      name: 'Detail',
-      component: Detail
-  }
+		}
   ]
 }) 

@@ -33,16 +33,17 @@
 						<h2>
 							{{item.name}}
 						</h2>
-						<div>
-							<a href="javascript:;">
-								<ul>
-									<li v-for="ite in item.values">
+						<div>						
+							<ul>								
+								<li v-for="ite in item.values">
+									<a href="javascript:;">
 										<span></span>
 										<span>{{ite.name}}</span>
 										<img v-lazy="ite.img" :src="ite.img"/>
-									</li>
-								</ul>
-							</a>
+									</a>
+								</li>
+							</ul>
+							
 						</div>	
 					</div>
 				</div>
