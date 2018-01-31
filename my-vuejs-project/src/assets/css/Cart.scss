@@ -55,3 +55,253 @@
     text-overflow: ellipsis;
     text-align: center;
 }
+.mui-bar-nav .btn.right {
+    margin-right: -10px;
+}
+.mui-bar-nav .btn {
+    position: relative;
+    display: block;
+    padding: 0 0.1rem;
+    font-size: 0.14rem;
+    border: none;
+}
+.mui-bar-nav a {
+    color: inherit;
+}
+.detail-action-bar {
+    display: flex;
+    padding: 0;
+    bottom: 0;
+    height: 0.46rem;
+    line-height: 0.46rem;
+    background-color: #fff;
+}
+.detail-action-bar .info {
+    display: block;
+    width: .1px;
+    flex: 1;
+    padding: 0 0.1rem;
+    font-size: 0.14rem;
+    color: #444;
+}
+.detail-action-bar .btn.primary {
+    background-color: #ca0e25 !important;
+}
+.detail-action-bar .btn {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 30%;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 0.14rem;
+}
+.detail-action-bar .info .price {
+    margin-right: 0.05rem;
+    font-size: 0.18rem;
+    color: #f00909;
+}
+/***************购物车为空*****************/
+.detail-action-bar~.mui-content {
+    padding-bottom: 0.46rem;
+}
+.mui-bar-nav ~ .mui-content {
+    padding-top: 0.5rem;
+}
+.ui-notice {
+    margin-top: 15%;
+    color: #bbb;
+    text-align: center;
+}
+.cart-empty .img-ico {
+    display: block;
+    max-width: 100%;
+    max-height: 1.2rem;
+    margin: 0 auto 0.2rem;
+}
+.ui-notice .desc {
+    padding-bottom: 0.1rem;
+    font-size: 0.14rem;
+    color: #888;
+}
+.ui-notice .btn-wrap{
+    margin: 0 0.13rem 0.2rem;
+}
+.ui-btn-md {
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.ui-btn-primary {
+    padding: 0 13px;
+    font-size: 12px;
+    line-height: 26px;
+    color: #fff;
+    background-color: #ca0e25;
+}
+.cart {
+    height: 100%;
+    font-family: "Helvetica Neue",Helvetica,sans-serif;
+    font-size: 0.17rem;
+    line-height: 0.21rem;
+    color: #000;
+    background-color: #f4f4f4;
+}
+
+/*********************QQ*****************/
+#dhp_kefu {
+    width: 0.4rem;
+    position: fixed;
+    right: 0.1rem;
+    bottom: 0.6rem;
+    z-index: 999;
+}
+
+
+#dhp_kefu a {
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    margin-top: 0.1rem;
+    color: #fff;
+    background-color: #E5594D;
+}
+
+#dhp_kefu a i {
+    font-size: 0.26rem;
+}
+
+/****************购物车****************/
+.cart-items {
+    margin-bottom: 0.1rem;
+}
+.cart-item {
+    position: relative;
+    padding: 0.15rem 0.1rem;
+    display: flex;
+    background-color: #fff;
+}
+.cart-item .figure {
+    display: block;
+}
+.cart-item .figure img {
+    display: block;
+    height: 0.9rem;
+    border: 1px solid #d7d7d7;
+}
+.cart-item .cnt {
+    display: block;
+    width: .1px;
+    flex: 1;
+    padding: 0 0.1rem;
+    line-height: 0.22rem;
+    font-size: 0.14rem;
+    color: #222;
+}
+.cart-item .cnt .name {
+    margin-bottom: 0.08rem;
+}
+.cart-item .cnt .action {
+    overflow: hidden;
+    margin-bottom: 0.08rem;
+}
+.cart-item .mui-numbox {
+    width: 0.8rem;
+    height: 0.22rem;
+    padding: 0 0.22rem;
+    border: none;
+    font-size: 0;
+    border-radius: 0;
+}
+.cart-item .mui-numbox .mui-btn {
+    padding: 0;
+    height: 0.22rem;
+    width: 0.22rem;
+    line-height: 0.2rem;
+    color: #adadad;
+    font-size: 0;
+    border: 1px solid #d9d9d9;
+    background: #fcfcfc;
+    border-radius: 0;
+}
+.cart-item .mui-numbox .mui-btn i {
+    font-size: 0.14rem;
+    display: inline-block;
+    vertical-align: top;
+    height: 1px;
+    line-height: inherit;
+}
+.cart-item .mui-numbox .mui-input-numbox {
+    height: 0.22rem;
+    font-size: 0.14rem;
+    line-height: 0.22rem;
+    border: none !important;
+    background-color: #fff;
+}
+.mui-numbox {
+    border: solid 1px #bbb;
+    overflow: hidden;
+    display: inline-block;
+    height: 0.35rem;
+    border-radius: 0.03rem;
+    background-color: #efeff4;
+    vertical-align: top;
+    position: relative;
+    padding: 0px 0.4rem 0px 0.4rem;
+    width: 1.2rem;
+    vertical-align: middle;
+}
+.mui-numbox [class*=numbox-btn], .mui-numbox [class*=btn-numbox] {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    border: none;
+    border-radius: 0px;
+    font-size: 18px;
+    color: #555;
+    line-height: 100%;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 0px;
+    background-color: #f9f9f9;
+}
+.mui-numbox .mui-numbox-btn-minus, .mui-numbox .mui-btn-numbox-minus {
+    left: 0px;
+    border-top-left-radius: 0.03rem;
+    border-bottom-left-radius: 0.03rem;
+}
+.mui-numbox .mui-numbox-input, .mui-numbox .mui-input-numbox {
+    width: 100% !important;
+    height: 100%;
+    text-align: center;
+    border: none !important;
+    border-left: solid 1px #ccc !important;
+    border-right: solid 1px #ccc !important;
+    margin: 0px;
+    padding: 0px 0.03rem !important;
+    display: inline-block;
+    border-radius: 0px !important;
+    text-overflow: ellipsis;
+    word-break: normal;
+    overflow: hidden;
+}
+.cart-item .cnt .del {
+    float: right;
+    padding: 0.01rem;
+    color: #d0d0d0;
+    line-height: 1;
+}
+.cart-item .cnt .del i {
+    font-size: 0.2rem;
+}
+.cart-item .cnt .price {
+    color: #f00909;
+}

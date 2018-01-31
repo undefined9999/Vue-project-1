@@ -50,10 +50,10 @@ export default new Router({
       name: 'Login3',
       component: Login3
  },
-  {
+{
       path: '/cart', 
       name: 'Cart',
       component: Cart
-  }
+}
   ]
 }) 
