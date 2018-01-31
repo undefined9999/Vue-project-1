@@ -477,3 +477,90 @@ a {
 #dhp_kefu a i {
     font-size: 0.26rem;
 }
+
+/***********************选项卡用户评价****************************/
+.detail-reply {
+    background-color: #fff;
+}
+.mui-content-padded {
+    margin: 0.1rem;
+}
+.detail-reply .reply-item .reply {
+    line-height: 1.61;
+}
+.detail-reply .reply-item .info .time {
+    font-size: 0.12rem;
+    color: #c0c0c0;
+}
+.detail-reply .reply-item .info .uname {
+    font-size: 0.13rem;
+    color: #066dcc;
+}
+.detail-reply .reply-item .info .pj.good {
+    color: #ca0e25;
+}
+
+.detail-reply .reply-item .info .pj {
+    position: relative;
+    margin-left: 0.07rem;
+    padding-left: 0.07rem;
+    font-size: 0.12rem;
+    color: #ffaa30;
+}
+.ui-border-l {
+    border-left: 1px solid #d7d7d7;
+}
+.detail-reply .reply-item .info .uname {
+    font-size: 0.13rem;
+    color: #066dcc;
+}
+.detail-reply .reply-item .info {
+    display: flex;
+    justify-content: space-between;
+    line-height: 0.32rem;
+}
+.detail-reply .reply-item .cnt {
+    margin-left: 0.32rem;
+    padding: 0 0 0 0.08rem;
+    font-size: 0.14rem;
+    color: #666;
+}
+.detail-reply .reply-item {
+    padding: 0.1rem;
+    overflow: hidden;
+}
+.ui-border-b, .ui-tabs, .ui-box:after, .cart-item:after {
+    border-bottom: 0.01rem solid #d7d7d7;
+    border-top: 0;
+}
+.detail-reply .reply-item .avatar .img img{
+//  padding-bottom: 100%;
+//  background-repeat: no-repeat;
+//  background-position: center;
+//  background-size: 100% auto;
+width: 0.32rem;
+    height: 0.32rem;
+}
+.detail-reply .reply-item .avatar {
+    float: left;
+    width: 0.32rem;
+    height: 0.32rem;
+}
+/***************************鲜花问答*****************************/
+.detail-faq {
+    padding: 0.1rem;
+    background-color: #fff;
+}
+.ask {
+    color: red;
+}
+/******************************吸顶*********************************/
+.searchBar{
+ .isFixed{
+   position:fixed;
+// background-color:#Fff;
+ top:0;
+ z-index:999;
+ width: 100%;
+ }
+}

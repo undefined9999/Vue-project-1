@@ -53,14 +53,14 @@
 				<p class="iconfont icon-icon-test-copy"></p>
 			</aside>
 		</section>
-		<footer></footer>
+		<common-footer></common-footer>
 	</div>
 </template>
 
 
 
 <script>
-	
+	import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
 	
@@ -73,7 +73,11 @@ export default {
 			list : []	
 		}
 	},
+	 components: {
+      'common-footer' : Footer
+  },
 	mounted() {
+		$("#foot li:nth-of-type(2) a").css("color","#ca0e25");
 		axios.get("/api/product/category")
 		.then((res)=>{
 			console.log(res)
