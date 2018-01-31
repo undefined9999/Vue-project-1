@@ -296,14 +296,8 @@
 <script type="text/javascript" src="../assets/js/zepto.jsv1.2.0.js"></script>
 <script>
 	import axios from 'axios';
-
 	import { TabContainer, TabContainerItem } from 'mint-ui';
-
-/*Vue.component(TabContainer.name, TabContainer);
-Vue.component(TabContainerItem.name, TabContainerItem);*/
-
 	import InfiniteLoading from 'vue-infinite-loading';
-	
 
 	export default {
 		name: "Detail_page1",

@@ -305,3 +305,60 @@
 .cart-item .cnt .price {
     color: #f00909;
 }
+
+/***********************ui-box-rec*************************/
+.ui-box-rec {
+    margin-bottom: 0.6rem;
+}
+.ui-box-rec .rec-hd {
+    padding: 0 0.1rem;
+    line-height: 0.46rem;
+    font-size: 0.14rem;
+    color: #444;
+}
+.ui-box-rec .rec-list {
+    padding: 0 0.05rem 0.14rem;
+}
+.ui-box-rec .rec-list .col {
+    padding: 0 5px;
+   
+    background: #FFFFFF;
+}
+.mui-row>[class*="mui-col-"] {
+    float: left;
+}
+.mui-col-xs-6 {
+    width: 50%;
+}
+.ui-box-rec .rec-list .item {
+    position: relative;
+    display: block;
+    padding: 0.08rem 0.08rem 0.05rem;
+}
+.ui-box-rec .rec-list .price {
+    color: #f00909;
+    font-size: 0.14rem;
+    line-height: 0.2rem;
+}
+.ui-box-rec .rec-list .col {
+    padding: 0 0.05rem;
+}
+.mui-row>[class*="mui-col-"] {
+    float: left;
+}
+.mui-col-xs-6 {
+    width: 50%;
+}
+a {
+    background: #FFFFFF;
+}
+.mui-row:before, .mui-row:after {
+    display: table;
+    content: " ";
+}
+.mui-row:after {
+    clear: both;
+}
+.mint-swipe-indicator.is-active {
+    background: #ca0e25;
+    opacity: 1;
