@@ -12,7 +12,7 @@
             </div>
 	 	     <ul class="plist mui-row">
 	 	     	<li class="mui-col-xs-6" v-for="item in ite.attribute">
-	 	     		<router-link to="" class="link">
+	 	     		<router-link :to="{name : 'Detail' , params : {Id : item.item_id}}" class="link">
 	 	     			<div class="figure">
 	 	     				<img v-lazy.container="item.items.img" alt="" />
 	 	     			</div>	 	     			                      
@@ -47,7 +47,7 @@
 			.then((response) => {
 	//		console.log(response);
 			this.arr_top = response.data.data.floor;
-	//		console.log(this.arr_top)
+//			console.log(this.arr_top)
 	//		console.log(this.arr_top[0].attribute[0].items.img)
 			})
 			.catch(function (error) {

@@ -166,7 +166,11 @@ export default {
 			})	
 		}
 	},
-	 beforeMount(){
+	 beforeMount(){	 
+		    if(location.href.indexOf('#reloaded')==-1){
+		    location.href=location.href+"#reloaded";
+		    location.reload();  
+   				 }
 	 	this.loading = true;
   		Indicator.open({
 			  text: '',
@@ -174,6 +178,7 @@ export default {
 			});
   },
 	mounted() {
+			
 		$("#foot li:nth-of-type(2) a").css("color","#ca0e25");
 		axios.get("/api/product/category")
 		.then((res)=>{

@@ -9,21 +9,23 @@
 			
 			</div>
 			<a href="javascript:;" class="btn right topmenu-btn">
-				<span style="color: #FFFFFF;" @click="myur()">导航</span>
+				<span style="color: #FFFFFF;" @click="foots()">导航</span>
 			</a>
 		</header>
+		<common-footer v-if="flag"></common-footer>
 		<!---------------------------------------->
+		
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
 				<span id="count-price" class="price" v-if="$store.state.cart == null">0.00</span>
-				<span id="count-price" class="price" v-if="$store.state.cart != null">{{$store.state.cart[0].detail.mobile_price}}</span>
+				<span id="count-price" class="price" v-if="$store.state.cart != null">{{cartsprice}}</span>
 				元
 			</div>
 			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
 			<span class="btn primary" style="width:100%">
 				去结算(
-				<span>{{$store.state.cart.length}}</span>
+				<span v-if="$store.state.cart">{{$store.state.cart.length}}</span>
 				)
 			</span>
 			</router-link>
@@ -35,8 +37,7 @@
 			<div class="ui-notice cart-empty" style="display: block;"  v-if="$store.state.cart == null">
 				
 				<img class="img-ico" src="http://www.dinghuapai.cn/wap/img/cart-empty.png" />
-				<div class="desc">购物车还没有任何商品</div>
-			
+				<div class="desc">购物车还没有任何商品</div>			
 			<div class="btn-wrap">
 				<router-link :to="{name : 'List2' , params : {Attr_id : 1001,Id : 2}}" id="defBack" class="back-btn mui-action-back">
 				<a href="" class="ui-btn-primary ui-btn-md" style="color: #FFFFFF;padding:9px;font-size: 0.14rem;line-height: 0.3rem;border-radius: 0.05rem;">去逛逛</a></router-link>
@@ -44,15 +45,15 @@
 			</div>
 			
 			<div class="cart-items" v-if="$store.state.cart">
-				<div class="cart-item">
+				<div class="cart-item" v-for="ite in carts">
 					<div class="figure">
 						<a href="">
-							<img :src="$store.state.cart[0].detail.img" />
+							<img :src="ite.detail.img" />
 						</a>
 					</div>
 					<div class="cnt">
 						<div class="name">
-							<a href="javascript:;" >{{$store.state.cart[0].detail.title}}</a>
+							<a href="javascript:;" >{{ite.detail.title}}</a>
 						</div>
 						<div class="action">
 							数量：
@@ -73,7 +74,7 @@
 						<div>
 							价格:
 							<span class="price" data-price="129">
-								{{$store.state.cart[0].detail.mobile_price}}
+								{{ite.detail.mobile_price}}
 							</span>
 						</div>
 						
@@ -115,6 +116,7 @@
 </template>
 
 <script>
+	import Footer from '@/components/Footer'
 import axios from 'axios';
 import { MessageBox } from 'mint-ui';
 export default {
@@ -125,12 +127,15 @@ export default {
 			app_imgs:{},
 			hots:[],
 			count:1,
-			detail:[]		
+			detail:[],
+			flag: false,
+			carts:this.$store.state.cart,
+			cartsprice:null
 		}
 	},
 	mounted() {
-		console.log(this.$store.state.cart)
-		this.myur();
+		this.commonprice();
+		console.log(this.carts)
 		axios.get('/api/product/index?id=12396')			
 				.then((response) => {					
 /*********也许你喜欢的列表***********/				
@@ -142,18 +147,25 @@ export default {
 					this.app_imgs = imgs
 //					console.log(typeof this.app_imgs)	
 //					console.log( response.data.data.hots[1])
-//					for(var i = 0;i<response.data.data.hots.length;i++){
-//						this.hots.push(response.data.data.hots[i])
-//					}
+					for(var i = 0;i<response.data.data.hots.length;i++){
+						this.hots.push(response.data.data.hots[i])
+					}
 					
 				})			
 	},
 	methods:{
-		myur(){
-//			this.$store.state.cart = null;
-
-			console.log( this.$store.state.cart);
-		},
+		foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			},
+			commonprice(){
+				var that = this;
+		$.each(this.carts, function(index,value) {
+	 that.cartsprice += value.detail.mobile_price;
+//	 console.log(value.detail.mobile_price)
+//	 console.log(that.cartsprice)
+			});			
+			},
 		del(){ 	       			
 			
 			MessageBox.confirm('', {
@@ -163,12 +175,13 @@ export default {
                 cancelButtonText: '取消'
             }).then(action => {
                 if (action == 'confirm') {
-                    console.log('确定');
+//                  console.log('确定');
         			this.$store.dispatch("delToCartA");
+        			this.commonprice();
                 }
             }).catch(err => {
                 if (err == 'cancel') {
-                    console.log('取消');
+//                  console.log('取消');
                 }
             })
 		},
@@ -188,13 +201,18 @@ export default {
 			for(var i = 0;i<this.$store.state.cart.detail.length;i++){
 				this.detail.push(that.$store.state.cart.detail[i])
 			}
-        }
-       
-	
-	}
+        }	
+	},
+	components: {
+	      'common-footer' : Footer
+	  },
 }
 </script>
 
 <style scoped lang="scss">
 	@import '../assets/css/Cart.scss';
+	footer{
+	position: absolute;top:0.5rem;
+	z-index:99;
+}
 </style>

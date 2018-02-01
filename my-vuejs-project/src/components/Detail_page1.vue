@@ -11,7 +11,7 @@
 				<span id="count-price" class="price" v-if="cart.detail">{{cart.detail.mobile_price}}</span> 元
 			</div>
 			
-				<span class="btn warning" @click="addToCart()">加入购物车</span>
+				<span class="btn warning" @click.stop="addToCart()">加入购物车</span>
 			
 			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
 			<a href="javascript:;" class="btn primary" style="height: 100%;width: 100%;">立即购买</a>
@@ -347,15 +347,15 @@
 			}
 		},
 		beforeMount(){
+		
 			this.loading = true;
 			Indicator.open({
 				text :'',
 				spinnerType:'triple-bounce'
 			});
-			
-  			
-  		},
+		},
 		mounted() {
+			
 			var Id = this.$route.params.Id;
 			this.getData();			
 			window.addEventListener('scroll', this.handleScroll);	
@@ -366,7 +366,7 @@
 /*************详情动态信息************/
 //					console.log(response.data.data)
 					this.cart = response.data.data;
-					console.log(this.cart);
+//					console.log(this.cart);
 					
 /*********也许你喜欢的列表***********/				
 					this.list = response.data.data.detail.images;
@@ -380,7 +380,6 @@
 					for(var i = 0;i<response.data.data.hots.length;i++){
 						this.hots.push(response.data.data.hots[i])
 					}
-					
 				})
 				Indicator.close();
 				
@@ -421,29 +420,30 @@
 				window.removeEventListener('scroll', this.handleScroll)
 			}, 
 			addToCart() {
-				var cart = this.cart;
-				// 启动action
-				// dispatch("action的名字")
-								
 				/*************弹出框***********/
 				MessageBox.confirm('', {
-                message: '已加入购物车，是否去结算?',
-                title: '提示',
-                confirmButtonText: '确定',
-                cancelButtonText: '取消'
-            }).then(action => {
-            	var that = this;
+	                message: '已加入购物车，是否去结算?',
+	                title: '提示',
+	                confirmButtonText: '确定',
+	                cancelButtonText: '取消'
+                      }).then(action => {
+                      	
+                      	
                 if (action == 'confirm') {
+                	var goods = this.cart;
+                	console.log(this.cart)
 //                  console.log('确定');
-					that.$store.dispatch("addToCartA", cart);
-                     that.$router.push({path : "/cart"});
-                	                   
+		this.$store.dispatch("addToCartA", goods);
+					this.$nextTick(function(){
+                     this.$router.push({path : "/cart"});
+                	     })              
                 }
             }).catch(err => {
                 if (err == 'cancel') {
 //                  console.log('取消');
                 }
             })
+			
 				
 			},
 			minus(i) {
