@@ -1,9 +1,7 @@
 <template>
 	<div id="main"> 
 	<header>
-			<div class="loadingDiv" v-if="loading">
-			玩命加载中......
-			</div>
+			<div class="loadingDiv" v-if="loading"></div>
 			<div class="bd">
 				<router-link to="/index">
 				</router-link>
@@ -42,7 +40,10 @@ export default {
       'common-footer' : Footer
   },
   beforeMount(){
-  		Indicator.open('加载中...');
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
   },
   mounted(){  	
   	$("#foot li:nth-of-type(1) a").css("color","#ca0e25")
@@ -103,13 +104,5 @@ header {
 #main{
 	width:100%;height:100%;display: flex;flex-direction: column;
 }
-.loadingDiv {
-		position: fixed;
-		height: 100%;
-		width: 100%;
-		left: 0;
-		top: 0;
-		background: rgba(0,0,0,0.5);
-		z-index: 999;
-	}
+
 </style>

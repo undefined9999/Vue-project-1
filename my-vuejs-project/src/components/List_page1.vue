@@ -1,5 +1,6 @@
 <template>
 	<div class="page1">
+		<div class="loadingDiv" v-if="loading"></div>
 		<header>
 			<div class="top">
 				<span class="iconfont icon-fangdajing">
@@ -81,6 +82,7 @@
 
 
 <script>
+	import { Indicator } from 'mint-ui';
 import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
@@ -92,6 +94,7 @@ export default {
 		return {
 			items : null,
 			list : [],
+			loading: false
 		}
 	},
 	 components: {
@@ -163,6 +166,13 @@ export default {
 			})	
 		}
 	},
+	 beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+  },
 	mounted() {
 		$("#foot li:nth-of-type(2) a").css("color","#ca0e25");
 		axios.get("/api/product/category")
@@ -170,6 +180,8 @@ export default {
 //			console.log(res)
 			this.items = res.data.data.label;
 			this.list = res.data.data.category;
+			this.loading = false;
+			Indicator.close();
 		})
 	},
 	

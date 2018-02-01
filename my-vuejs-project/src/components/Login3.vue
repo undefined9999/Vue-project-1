@@ -1,5 +1,6 @@
 <template>
 	<div class="solt">
+		<div class="loadingDiv" v-if="loading"></div>
 	<header>
     <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
     <div class="title">
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+	import { Indicator } from 'mint-ui';
 	import Footer from '@/components/Footer'
 import axios from 'axios';
 import { Toast } from 'mint-ui';
@@ -40,7 +42,8 @@ export default {
 		return {
 			 flag: false,
 			 username :[],
-			 password : []
+			 password : [],
+			 loading:false
 		}
 	},
 	methods:{
@@ -56,8 +59,18 @@ export default {
 				});
 		}	
 	},
+	beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+     },
 	mounted() {
-	
+		setTimeout(()=>{
+			this.loading = false;
+			Indicator.close();
+		},1000)
 	},
 components: {
       'common-footer' : Footer

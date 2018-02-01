@@ -1,5 +1,6 @@
 <template>
 	<div class="solt">
+		<div class="loadingDiv" v-if="loading"></div>
 	<header>
 		<!--{{$store.state.cart.length}}-->
     <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
@@ -78,6 +79,7 @@
 </template>
 
 <script>
+	import { Indicator } from 'mint-ui';
 	import Footer from '@/components/Footer'
 import axios from 'axios';
 import { Toast } from 'mint-ui';
@@ -97,7 +99,8 @@ export default {
 			 {'id': 7,'name':'修改密码',  'img':'http://www.dinghuapai.cn/wap/img/uc/pwd.png'},
 			 {'id': 8,'name':'在线咨询',  'img':'http://www.dinghuapai.cn/wap/img/uc/kefu.png'},
 			 {'id': 9,'name':'关于订花派','img':'http://www.dinghuapai.cn/wap/img/uc/dhp.png'}
-			 	]
+			 	],
+			 	loading:false
 		}
 	},
 	methods:{
@@ -115,8 +118,18 @@ export default {
 				});
 		}
 	},
+	beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+     },
 	mounted() {
-		
+			setTimeout(()=>{
+			this.loading = false;
+			Indicator.close();
+		},1000)
 	},
 components: {
       'common-footer' : Footer

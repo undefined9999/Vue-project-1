@@ -5,7 +5,7 @@ h1,h2,h3,h4,h5,h6,strong,b{font-weight:normal;}
 i,em{font-style:normal;}
 a{text-decoration:none; color:#666;}
 li,ul,ol{list-style:none;}
-img{border:none;vertical-align:top;}
+img{border:none;vertical-align:top;object-fit:cover;}
 input{vertical-align:top;}
 a,input,area{outline:none;}
 img,fieldset{border:0; }

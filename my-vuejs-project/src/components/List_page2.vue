@@ -1,5 +1,6 @@
 <template>
 	<div class="page2">
+		<div class="loadingDiv" v-if="loading"></div>
 		<header>
 			<router-link to="/list1" class="left_">
 				&lt;
@@ -98,6 +99,7 @@
 
 
 <script>
+	import { Indicator } from 'mint-ui';
 	import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
@@ -115,10 +117,17 @@ export default {
 			 list_l : [],
 			 itemss : [],
 			 showFlag : false,
-			 flag: false
+			 flag: false		 
 		}
 		
 	},
+	 beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+  },
 	mounted() {
 		var Attr_id = this.$route.params.Attr_id;
 		var Id = this.$route.params.Id;
@@ -129,6 +138,8 @@ export default {
 			this.lei = res.data.data.selected;
 			this.list = res.data.data.goodsList.data;
 			this.items = res.data.data.attulist;
+			this.loading = false;
+			Indicator.close();
 		}),
 		axios.get("/api/product/category")
 		.then((res)=>{

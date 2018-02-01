@@ -9,6 +9,7 @@
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
 
 <script>
+	
   import Page1 from './components/list_page1';
   var rempx = document.documentElement.clientWidth / 4.2;
 	document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";
@@ -17,6 +18,11 @@
 	
   export default {
   name: 'App',
+  data:function(){
+  	return{
+  		loading: false
+  	}
+  },
   components: {
   		
 	  }
@@ -40,5 +46,14 @@
 body, html {
 	  width: 100%;
 	  height: 100%;
+	}
+	.loadingDiv {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		background: rgba(0,0,0,0.5);
+		z-index: 999;
 	}
 </style>

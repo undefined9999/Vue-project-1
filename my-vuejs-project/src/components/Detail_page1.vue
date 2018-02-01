@@ -4,11 +4,8 @@
 			<div class="info">
 				合计：
 				<span id="count-price" class="price">243</span> 元
-			</div>
-			
-				<span class="btn warning" @click="addToCart()">加入购物车</span>
-			
-			
+			</div>			
+				<span class="btn warning" @click="addToCart()">加入购物车</span>			
 			<a href="javascript:;" class="btn primary">立即购买</a>
 		</div>
 		<div class="mui-content">
@@ -26,7 +23,7 @@
 	<!------------------------------------------->
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
-						<mt-swipe-item v-for="item in list">
+						<mt-swipe-item v-for="item in list" :key="item.id">
 							<img :src="item" style="width: 100%;height: 100%;" />
 						</mt-swipe-item>
 					</mt-swipe>
@@ -434,16 +431,14 @@
        		},
 	        plus(i) {
 	           this.count++;
-				this.$emit('input', {res: this.count, other: '++'})			
-	        }
+				this.$emit('input', {res: this.count, other: '++'})				        
 				this.$store.dispatch("addToCartA", cart);
 				this.$router.push({path : "/cart"})
 			},
 			foots : function(){
 				this.flag =! this.flag;
 	//			console.log(this.flag)
-			},
-			
+			}		
 		  },
 		 components: {
 		    InfiniteLoading,
@@ -457,7 +452,7 @@
 	@import '../assets/css/swiper.min.css';
 	@import '../assets/css/iconfont/iconfont2.css';
 	@import '../assets/css/Detail_page1.scss';
-	header{
+header{
 	    display: flex;align-items: center;
 	   justify-content: space-between;
 	    height: 0.5rem;color: #666;padding:0 0.05rem;
@@ -467,6 +462,9 @@
 		    padding: 0 0.05rem;
 		}
 }
+
+
+
 footer{
 	position: absolute;top:0.5rem;z-index: 999;
 }
