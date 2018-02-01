@@ -14,7 +14,7 @@
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
-				<span id="count-price" class="price">{{end_money}}</span>
+				<span id="count-price" class="price">243</span>
 				元
 			</div>
 			<span class="btn primary">
@@ -27,7 +27,7 @@
 		<!--购物车为空-->
 		
 		<div class="mui-content" >
-			<div class="ui-notice cart-empty" style="display: block;"  v-if="flag">
+			<div class="ui-notice cart-empty" style="display: block;"  v-if="$store.state.cart[0] == null">
 				
 				<img class="img-ico" src="http://www.dinghuapai.cn/wap/img/cart-empty.png" />
 				<div class="desc">购物车还没有任何商品</div>
@@ -37,7 +37,7 @@
 			</div>
 			</div>
 			
-			<div class="cart-items">
+			<div class="cart-items" v-if="$store.state.cart[0]">
 				<div class="cart-item">
 					<div class="figure">
 						<a href="">
@@ -46,7 +46,7 @@
 					</div>
 					<div class="cnt">
 						<div class="name">
-							<a href="" >{{$store.state.cart[0].detail.title}}</a>
+							<a href="javascript:;" >{{$store.state.cart[0].detail.title}}</a>
 						</div>
 						<div class="action">
 							数量：
@@ -78,12 +78,12 @@
 			
 		</div>
 		
-		<!--<div class="ui-box ui-box-rec">
+		<div class="ui-box ui-box-rec" v-if="$store.state.cart[0] != null">
 								<div class="rec-hd">也许你还喜欢</div>
 								<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 								
 									<div class="mui-col-xs-6 col" v-for="item in hots">
-										<a href="" class="item" style=" border: 1px solid #CCCCCC;">
+										<a href="javascript:;" class="item" style=" border: 1px solid #CCCCCC;">
 											<img :src ="item.img" style="width: 100%;"/>
 											<div class="cnt">
 												<div class="name" >{{item.title}}</div>
@@ -94,7 +94,7 @@
 										</a>
 									</div>
 								</div>
-							</div>-->
+							</div>
 		<!--fixed QQ-->
 		<div id="dhp_kefu">
 		<a href="" class="qq" style="background: #5294D0;">
@@ -110,34 +110,36 @@
 
 <script>
 import axios from 'axios';
+import { MessageBox } from 'mint-ui';
 export default {
 	name: "Cart",
 	data: function() {
-		return {
-			flag:false,
+		return {			
 			list: [],
 			app_imgs:{},
+			hots:[],
 			count:1
+			
 		}
 	},
 	mounted() {
 		this.myur();
-//		axios.get('/api/product/index?id=12396')			
-//				.then((response) => {					
-///*********也许你喜欢的列表***********/				
-//					this.list = response.data.data.detail.images;
-//					this.app_imgs = response.data.data.detail.description;
-//					var imgs = response.data.data.detail.description
-//					imgs = imgs.replace(/770px/g,"100%")
-////					console.log(imgs)
-//					this.app_imgs = imgs
-////					console.log(typeof this.app_imgs)	
-////					console.log( response.data.data.hots[1])
-//					for(var i = 0;i<response.data.data.hots.length;i++){
-//						this.hots.push(response.data.data.hots[i])
-//					}
-//					
-//				})			
+		axios.get('/api/product/index?id=12396')			
+				.then((response) => {					
+/*********也许你喜欢的列表***********/				
+					this.list = response.data.data.detail.images;
+					this.app_imgs = response.data.data.detail.description;
+					var imgs = response.data.data.detail.description
+					imgs = imgs.replace(/770px/g,"100%")
+//					console.log(imgs)
+					this.app_imgs = imgs
+//					console.log(typeof this.app_imgs)	
+//					console.log( response.data.data.hots[1])
+					for(var i = 0;i<response.data.data.hots.length;i++){
+						this.hots.push(response.data.data.hots[i])
+					}
+					
+				})			
 	},
 	methods:{
 		myur(){
@@ -145,7 +147,23 @@ export default {
 
 			console.log(this.$store.state.cart);
 		},
-		del(){ 	       			this.$store.dispatch("delToCartA");
+		del(){ 	       			
+			
+			MessageBox.confirm('', {
+                message: '你确定删除该商品吗？',
+                title: '提示',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消'
+            }).then(action => {
+                if (action == 'confirm') {
+                    console.log('确定');
+        			 this.$store.dispatch("delToCartA");
+                }
+            }).catch(err => {
+                if (err == 'cancel') {
+                    console.log('取消');
+                }
+            })
 		},
 		minus(i) {
 	       //实现减少购买数量  
@@ -157,14 +175,8 @@ export default {
         },
         plus(i) {
            this.count++;
-			this.$emit('input', {res: this.count, other: '++'})
-        },
-//      end(){
-//      	var end_money = 0;
-//      	for(var i = 0;i < this.$store.state.cart.length;i++){
-//      		end_money = end_money + this.$store.state.cart.mobile_price[i].price*
-//      	}
-//      }
+			this.$emit('input', {res: this.count, other: '++'})			
+        }
 	
 	}
 }

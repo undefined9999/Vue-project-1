@@ -333,7 +333,7 @@
     }
     
     .detail-tabs .swiper-pagination-bullet-active {
-        color: #ca0e25;
+//      color: #ca0e25;
         background: none;
     }
     /************************ui-border-b************************/
@@ -563,4 +563,20 @@ width: 0.32rem;
  z-index:999;
  width: 100%;
  }
+}
+
+/***************遮罩层***************/
+.mui-popup-backdrop.mui-active {
+    opacity: 1;
+}
+.mui-popup-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 998;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;    
+    transition-duration: 400ms;
 }

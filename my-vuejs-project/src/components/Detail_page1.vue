@@ -16,8 +16,8 @@
 			<div class="banner-out detail-focus" style="margin: 0;">
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
-						<mt-swipe-item v-for="item in list" :key="item.id">
-							<img :src="item" style="width: 100%;height: 100%;" :key="item.id"/>
+						<mt-swipe-item v-for="item in list">
+							<img :src="item" style="width: 100%;height: 100%;" />
 						</mt-swipe-item>
 					</mt-swipe>
 
@@ -63,11 +63,11 @@
 						<div class="key">数量：</div>
 						<div class="cnt flex-col">
 							<div class="mui-numbox" data-numbox-min="1" data-numbox-max="30">
-								<button class="mui-btn mui-btn-numbox-minus" type="button" disabled style="width: 0.3rem;">
+								<button class="mui-btn mui-btn-numbox-minus" type="button"  style="width: 0.3rem;" @click="minus()">
 									<i class="iconfont icon-reduce" >-</i>
 								</button>
-								<input class="mui-input-numbox" disabled style="float: left;width: 0.3rem;" value="1">
-								<button class="mui-btn mui-btn-numbox-plus" type="button" style="float: right;width: 0.3rem;">
+								<span class="mui-input-numbox" disabled style="float: left;width: 0.3rem;" >{{count}}</span>
+								<button class="mui-btn mui-btn-numbox-plus" type="button" style="float: right;width: 0.3rem;" @click="plus()">
 									<i class="iconfont icon-plug" >+</i>
 								</button>
 							</div>
@@ -140,7 +140,7 @@
 								<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 								
 									<div class="mui-col-xs-6 col" v-for="item in hots">
-										<a href="" class="item" style=" border: 1px solid #CCCCCC;">
+										<a href="javascript:;" class="item" style=" border: 1px solid #CCCCCC;">
 											<img :src ="item.img" style="width: 100%;"/>
 											<div class="cnt">
 												<div class="name" >{{item.title}}</div>
@@ -276,6 +276,9 @@
 					    </div>  
 																																															
 			</div>
+						
+			<!--遮罩层-->
+			<div class="mui-popup-backdrop mui-active" v-if="flag"></div>
 
 		</div>
 			
@@ -298,7 +301,7 @@
 	import axios from 'axios';
 	import { TabContainer, TabContainerItem } from 'mint-ui';
 	import InfiniteLoading from 'vue-infinite-loading';
-
+	import { MessageBox } from 'mint-ui';
 	export default {
 		name: "Detail_page1",
 		data: function() {
@@ -320,7 +323,10 @@
 				user_pl:[],
 				page:0,
 				searchBarFixed:false,
-				cart : ' '
+				cart : ' ',
+				count:1,
+				flag:false
+				
 			}
 		},
 		mounted() {
@@ -330,7 +336,7 @@
 				.then((response) => {
 //					console.log(response.data.data.detail.description);
 /*************详情动态信息************/
-					console.log(response.data.data)
+//					console.log(response.data.data)
 					this.cart = response.data.data;
 //					console.log(this.cart.detail);
 					
@@ -347,7 +353,7 @@
 						this.hots.push(response.data.data.hots[i])
 					}
 					
-				})				
+				})
 		},
 		 methods: {
             infiniteHandler($state) {
@@ -386,9 +392,37 @@
 				var cart = this.cart;
 				// 启动action
 				// dispatch("action的名字")
-				this.$store.dispatch("addToCartA", cart);
-				this.$router.push({path : "/cart"})
-			}
+				this.$store.dispatch("addToCartA", cart);				
+				/*************弹出框***********/
+				MessageBox.confirm('', {
+                message: '已加入购物车，是否去结算?',
+                title: '提示',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消'
+            }).then(action => {
+                if (action == 'confirm') {
+                    console.log('确定');
+                    this.$router.push({path : "/cart"});
+                }
+            }).catch(err => {
+                if (err == 'cancel') {
+                    console.log('取消');
+                }
+            })
+				
+			},
+			minus(i) {
+	       //实现减少购买数量  
+           this.count--;
+				this.$emit('input', {res: this.count, other: '--'})
+				if(this.count < 1){
+					this.count = 1;
+				}
+       		},
+	        plus(i) {
+	           this.count++;
+				this.$emit('input', {res: this.count, other: '++'})			
+	        }
 			
 		  },
 		 components: {
