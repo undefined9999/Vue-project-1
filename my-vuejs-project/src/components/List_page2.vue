@@ -9,10 +9,12 @@
 				</span>
 				<input type="text" name="" id="" value="请输入关键字" placeholder="请输入关键字"/>
 			</div>
-			<a class="dao_hang">	
+			<span class="dao_hang" @click="foots()">	
 				导航
-			</a>
+			</span>
 		</header>
+		<common-footer v-show="flag"></common-footer>
+		<!---->
 		<section>
 			<div class="main_top">
 				<p>
@@ -48,7 +50,7 @@
 						</span>
 					</a>
 				</p>	
-			</div>
+			</div> 
 			
 
 			<div class="main_bot" id="container">
@@ -56,11 +58,11 @@
 				<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 				<ul>
 					<li v-for="item in list">
-						<a href="javascript:;">
+						<router-link :to="{name : 'Detail' , params : {Id : item.id}}">
 							<img :src="item.img" v-lazy.container="item.img"/>
 							<p>{{item.title}}</p>
 							<p>￥{{item.price}}</p>
-						</a>
+						</router-link>
 					</li>
 				</ul>
 				</mt-loadmore>
@@ -96,7 +98,7 @@
 
 
 <script>
-	
+	import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
 	
@@ -112,7 +114,8 @@ export default {
 			 items : [],
 			 list_l : [],
 			 itemss : [],
-			 showFlag : false
+			 showFlag : false,
+			 flag: false
 		}
 		
 	},
@@ -121,7 +124,7 @@ export default {
 		var Id = this.$route.params.Id;
 		axios.get(`/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=${Attr_id}_${Id}&sort=`)
 		.then((res)=>{
-			console.log(res)
+//			console.log(res)
 			this.hua = res.data.data.category;
 			this.lei = res.data.data.selected;
 			this.list = res.data.data.goodsList.data;
@@ -129,14 +132,14 @@ export default {
 		}),
 		axios.get("/api/product/category")
 		.then((res)=>{
-			console.log(res)
+//			console.log(res)
 			this.itemss = res.data.data.label;
 		})
 	},
 	methods: {
 		//  向上加载更多
 	    loadTop() {
-	      console.log("loadTop");
+//	      console.log("loadTop");
 	      setTimeout(() => {
 	        Toast('数据重新加载完成');
 	        this.$refs.loadmore.onTopLoaded();
@@ -153,7 +156,14 @@ export default {
 	    },
 	    hideMenu () {
 			this.showFlag = !this.showFlag;			
-		}
+		},
+    	foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			}
+  },
+  components:{
+  	'common-footer' : Footer
   }
 
 }
@@ -166,4 +176,8 @@ export default {
 
 <style scoped lang="scss">
 	@import '../assets/css/List_page2.scss';
+	footer{
+	position: absolute;top:0.5rem;
+	transform:all 2s;
+}
 </style>

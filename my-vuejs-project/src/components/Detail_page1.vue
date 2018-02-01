@@ -14,6 +14,16 @@
 		<div class="mui-content">
 			<!--banner-->
 			<div class="banner-out detail-focus" style="margin: 0;">
+				<!--//////////////////////////////////-->
+					<header>
+	    <router-link :to="{name : 'List2' , params : {Attr_id : 1001,Id : 2}}" id="defBack" class="back-btn mui-action-back">&lt;</router-link>
+	    <div class="title">
+	        <div class="center">商品详情</div>
+	    </div>
+	    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
+	</header>
+	<common-footer v-if="flag"></common-footer>
+	<!------------------------------------------->
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
 						<mt-swipe-item v-for="item in list" :key="item.id">
@@ -296,6 +306,7 @@
 <script type="text/javascript" src="../assets/js/zepto.jsv1.2.0.js"></script>
 <script>
 	import axios from 'axios';
+	import Footer from '@/components/Footer'
 	import { TabContainer, TabContainerItem } from 'mint-ui';
 	import InfiniteLoading from 'vue-infinite-loading';
 
@@ -320,19 +331,22 @@
 				user_pl:[],
 				page:0,
 				searchBarFixed:false,
-				cart : ' '
+				cart : ' ',
+				flag: false
 			}
 		},
 		mounted() {
-			this.getData();
-			window.addEventListener('scroll', this.handleScroll);			
-			axios.get('/api/product/index?id=12396')			
+			var Id = this.$route.params.Id;
+			this.getData();			
+			window.addEventListener('scroll', this.handleScroll);	
+			
+			axios.get(`/api/product/index?id=${Id}`)			
 				.then((response) => {
 //					console.log(response.data.data.detail.description);
 /*************详情动态信息************/
 					console.log(response.data.data)
 					this.cart = response.data.data;
-//					console.log(this.cart.detail);
+					console.log(this.cart);
 					
 /*********也许你喜欢的列表***********/				
 					this.list = response.data.data.detail.images;
@@ -347,7 +361,7 @@
 						this.hots.push(response.data.data.hots[i])
 					}
 					
-				})				
+				})
 		},
 		 methods: {
             infiniteHandler($state) {
@@ -388,11 +402,16 @@
 				// dispatch("action的名字")
 				this.$store.dispatch("addToCartA", cart);
 				this.$router.push({path : "/cart"})
-			}
+			},
+			foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			},
 			
 		  },
 		 components: {
 		    InfiniteLoading,
+		    'common-footer' : Footer
 		 },
 		
 	}
@@ -402,5 +421,17 @@
 	@import '../assets/css/swiper.min.css';
 	@import '../assets/css/iconfont/iconfont2.css';
 	@import '../assets/css/Detail_page1.scss';
-	
+	header{
+	    display: flex;align-items: center;
+	   justify-content: space-between;
+	    height: 0.5rem;color: #666;padding:0 0.05rem;
+	    background-color: #fff;width:100%;
+ 	.back-btn {
+		    display: block;
+		    padding: 0 0.05rem;
+		}
+}
+footer{
+	position: absolute;top:0.5rem;z-index: 999;
+}
 </style>

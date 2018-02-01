@@ -167,7 +167,7 @@ export default {
 		$("#foot li:nth-of-type(2) a").css("color","#ca0e25");
 		axios.get("/api/product/category")
 		.then((res)=>{
-			console.log(res)
+//			console.log(res)
 			this.items = res.data.data.label;
 			this.list = res.data.data.category;
 		})
