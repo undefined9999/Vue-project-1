@@ -60,16 +60,16 @@
 								<li v-for="ite in item.values" >
 									<router-link :to="{name : 'List2' , params : {Attr_id : ite.attr_id,Id : ite.id}}">
 										<span></span>
-										<span>{{ite.name}}</span>
-										<img v-lazy="ite.img" :src="ite.img"/>
+										<span @click="huaName(ite.name)">{{ite.name}}</span>
+										<img v-lazy="ite.img" :src="ite.img" @click="huaName(ite.name)"/>
 									</router-link>
 								</li>
 							</ul>
-							
 						</div>	
 					</div>
 				</div>
 			</div>
+			
 			<aside>
 				<p class="iconfont icon-QQ"></p>
 				<p class="iconfont icon-icon-test-copy"></p>
@@ -82,7 +82,8 @@
 
 
 <script>
-	import { Indicator } from 'mint-ui';
+
+import { Indicator } from 'mint-ui';
 import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
@@ -98,73 +99,86 @@ export default {
 		}
 	},
 	 components: {
-      'common-footer' : Footer
+      'common-footer' : Footer 
   	},
+  	beforeMount() {
+		this.loading = true;
+		Indicator.open({
+			text :'',
+			spinnerType:'triple-bounce' //  设置圈圈类型triple-bounce
+		})
+	},	
   	methods : {
+  		// vuex数据管理
+  		huaName(ite){
+  			this.$store.dispatch("huaNameA", ite);
+  			console.log(ite)
+  		},
+  		// 列表scrolltop事件
 		height_tiao1(){
 			this.$nextTick(function(){
 				$(".tiao_1").click(function(){					
-					$(".list_right").animate({"scrollTop":0},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":0},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao2(){
 			this.$nextTick(function(){
 				$(".tiao_2").click(function(){					
-					$(".list_right").animate({"scrollTop":100},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":105},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao3(){
 			this.$nextTick(function(){
 				$(".tiao_3").click(function(){					
-					$(".list_right").animate({"scrollTop":250},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":250},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao4(){
 			this.$nextTick(function(){
 				$(".tiao_4").click(function(){					
-					$(".list_right").animate({"scrollTop":720},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":720},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao5(){
 			this.$nextTick(function(){
 				$(".tiao_5").click(function(){					
-					$(".list_right").animate({"scrollTop":1200},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":1200},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao6(){
 			this.$nextTick(function(){
 				$(".tiao_6").click(function(){					
-					$(".list_right").animate({"scrollTop":1800},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":1800},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao7(){
 			this.$nextTick(function(){
 				$(".tiao_7").click(function(){					
-					$(".list_right").animate({"scrollTop":2300},1000)
-					$(this).css({"background":"#fff","border-left":"3px solid red"}).siblings().css({"background":"#f4f4f4","border-left":"none"})
+					$(".list_right").animate({"scrollTop":2300},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
 		},
 		height_tiao8(){
 			this.$nextTick(function(){
 				$(".tiao_8").click(function(){					
-					$(".list_right").animate({"scrollTop":1000},1000)
-					
+					$(".list_right").animate({"scrollTop":1000},0)
+					$(this).css({"background":"#fff","border-left":"3px solid #ca0e25","color":"#ca0e25"}).siblings().css({"background":"#f4f4f4","border-left":"none","color":"#000"})
 				})
 			})	
-		}
+		}		
 	},
 	 beforeMount(){	 
 		    if(location.href.indexOf('#reloaded')==-1){
@@ -186,7 +200,7 @@ export default {
 			this.items = res.data.data.label;
 			this.list = res.data.data.category;
 			this.loading = false;
-			Indicator.close();
+			Indicator.close();  //  dom元素加载完成后圈圈消失
 		})
 	},
 	

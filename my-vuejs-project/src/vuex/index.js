@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 var state = {
 	username: "",
-	cart:[]
+	cart:[],
+	huaname : []
 }
 
 // 持久化：从本地取出数据
@@ -39,6 +40,11 @@ const mutations = {
 		state.cart.pop();
 		// 持久化：保存数据
 		delTolocal(state);
+	},
+	huaName : function(state,hua_name){
+		state.huaname.shift(hua_name);
+		state.huaname.push(hua_name);
+		saveTolocal(state);
 	}
 }
 
@@ -51,6 +57,9 @@ const actions = {
 	},
 	delToCartA: function({commit}) {
 		commit("delToCart");
+	},
+	huaNameA : function({commit},hua_name){
+		commit("huaName",hua_name)
 	}
 }
 

@@ -101,8 +101,6 @@
 						</div>
 						
 					</div>
-					
-					
 						<div class="page-tab-container">  
 					      <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>  
 					       
@@ -172,7 +170,7 @@
 					        
 					        <mt-tab-container-item id="tab-container2" >  
 					            <!-- cell组件 -->  
-					          <mt-cell>
+					        <mt-cell>
 					          	<div class="mod-infinite" >
 					          		<div class="detail-reply">
 					          			<div class="reply-item ui-border-b" v-for="item in user_pl" :key="item.id">

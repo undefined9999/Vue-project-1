@@ -22,10 +22,10 @@
 </template>
 
 <script>
-	import { Indicator } from 'mint-ui';
+	import { Indicator } from 'mint-ui'; // 加载中
 	import axios from 'axios';
 	import Carousel from '@/components/Carousel'
-   import Footer from '@/components/Footer'
+    import Footer from '@/components/Footer'
 export default {
   name: 'common-header',
   data () {
