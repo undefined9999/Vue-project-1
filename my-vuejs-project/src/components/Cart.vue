@@ -16,8 +16,8 @@
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
-				<span id="count-price" class="price" v-if="$store.state.cart[0] == null">0.00</span>
-				<span id="count-price" class="price" v-if="$store.state.cart[0] != null">{{$store.state.cart[0].detail.mobile_price}}</span>
+				<span id="count-price" class="price" v-if="$store.state.cart == null">0.00</span>
+				<span id="count-price" class="price" v-if="$store.state.cart != null">{{$store.state.cart[0].detail.mobile_price}}</span>
 				元
 			</div>
 			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
@@ -32,7 +32,7 @@
 		<!--购物车为空-->
 		
 		<div class="mui-content" >
-			<div class="ui-notice cart-empty" style="display: block;"  v-if="$store.state.cart[0] == null">
+			<div class="ui-notice cart-empty" style="display: block;"  v-if="$store.state.cart == null">
 				
 				<img class="img-ico" src="http://www.dinghuapai.cn/wap/img/cart-empty.png" />
 				<div class="desc">购物车还没有任何商品</div>
@@ -43,7 +43,7 @@
 			</div>
 			</div>
 			
-			<div class="cart-items" v-if="$store.state.cart[0]">
+			<div class="cart-items" v-if="$store.state.cart">
 				<div class="cart-item">
 					<div class="figure">
 						<a href="">
@@ -84,7 +84,7 @@
 			
 		</div>
 		
-		<div class="ui-box ui-box-rec" v-if="$store.state.cart[0] != null">
+		<div class="ui-box ui-box-rec" v-if="$store.state.cart != null">
 								<div class="rec-hd">也许你还喜欢</div>
 								<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 								
@@ -129,6 +129,7 @@ export default {
 		}
 	},
 	mounted() {
+		console.log(this.$store.state.cart)
 		this.myur();
 		axios.get('/api/product/index?id=12396')			
 				.then((response) => {					
@@ -141,9 +142,9 @@ export default {
 					this.app_imgs = imgs
 //					console.log(typeof this.app_imgs)	
 //					console.log( response.data.data.hots[1])
-					for(var i = 0;i<response.data.data.hots.length;i++){
-						this.hots.push(response.data.data.hots[i])
-					}
+//					for(var i = 0;i<response.data.data.hots.length;i++){
+//						this.hots.push(response.data.data.hots[i])
+//					}
 					
 				})			
 	},
@@ -181,10 +182,11 @@ export default {
 			
         },
         plus(i) {
+        	var that = this;
            this.count++;
 			this.$emit('input', {res: this.count, other: '++'})		
-			for(var i = 0;i<$store.state.cart.detail.length;i++){
-				this.detail.push($store.state.cart.detail[i])
+			for(var i = 0;i<this.$store.state.cart.detail.length;i++){
+				this.detail.push(that.$store.state.cart.detail[i])
 			}
         }
        

@@ -1,11 +1,16 @@
-<template>			
+<template>
+	
+			
 	<div class="detail">
-		<div class="loadingDiv" v-if="loading"></div>
+		<div class="loadingDiv" v-if="loading">
+			玩命加载中......
+		</div>
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
 				<span id="count-price" class="price" v-if="cart.detail">{{cart.detail.mobile_price}}</span> 元
-			</div>		
+			</div>
+			
 				<span class="btn warning" @click="addToCart()">加入购物车</span>
 			
 			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
@@ -136,21 +141,21 @@
 													
 											</div>
 											<div style="width: 100%;">
-											<img :src ="item"  v-for="item in add_img1" style="width: 100%;height: 100%;"/>
+											<img :src ="item"  v-for="item in add_img1" :key="item.id" style="width: 100%;height: 100%;"/>
 											</div>
 											
 										</div>
 									</div>
 								</div>
 				  		          	
-				         
+				        
 				    		  </mt-cell>  
 								 <!--ui-box-rec-->
 							<div class="ui-box ui-box-rec">
 								<div class="rec-hd">也许你还喜欢</div>
 								<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 								
-									<div class="mui-col-xs-6 col" v-for="item in hots">
+									<div class="mui-col-xs-6 col" v-for="item in hots" :key="item.id">
 										<a href="javascript:;" class="item" style=" border: 1px solid #CCCCCC;">
 											<img :src ="item.img" style="width: 100%;"/>
 											<div class="cnt">
@@ -170,9 +175,9 @@
 					          <mt-cell>
 					          	<div class="mod-infinite" >
 					          		<div class="detail-reply">
-					          			<div class="reply-item ui-border-b" v-for="item in user_pl">
+					          			<div class="reply-item ui-border-b" v-for="item in user_pl" :key="item.id">
 					          			
-					          				<div class="avatar" >
+					          			<div class="avatar" >
 					          					<a href="">
 					          						<div class="img">
 					          							<img  :src="item.item_img">
@@ -419,7 +424,7 @@
 				var cart = this.cart;
 				// 启动action
 				// dispatch("action的名字")
-				this.$store.dispatch("addToCartA", cart);				
+								
 				/*************弹出框***********/
 				MessageBox.confirm('', {
                 message: '已加入购物车，是否去结算?',
@@ -427,13 +432,16 @@
                 confirmButtonText: '确定',
                 cancelButtonText: '取消'
             }).then(action => {
+            	var that = this;
                 if (action == 'confirm') {
-                    console.log('确定');
-                    this.$router.push({path : "/cart"});
+//                  console.log('确定');
+					that.$store.dispatch("addToCartA", cart);
+                     that.$router.push({path : "/cart"});
+                	                   
                 }
             }).catch(err => {
                 if (err == 'cancel') {
-                    console.log('取消');
+//                  console.log('取消');
                 }
             })
 				
@@ -448,14 +456,13 @@
        		},
 	        plus(i) {
 	           this.count++;
-				this.$emit('input', {res: this.count, other: '++'})				        
-				this.$store.dispatch("addToCartA", cart);
-				this.$router.push({path : "/cart"})
-			},
+				this.$emit('input', {res: this.count, other: '++'})					
+	        },
 			foots : function(){
 				this.flag =! this.flag;
 	//			console.log(this.flag)
-			}		
+			},
+			
 		  },
 		 components: {
 		    InfiniteLoading,
@@ -469,7 +476,7 @@
 	@import '../assets/css/swiper.min.css';
 	@import '../assets/css/iconfont/iconfont2.css';
 	@import '../assets/css/Detail_page1.scss';
-header{
+	header{
 	    display: flex;align-items: center;
 	   justify-content: space-between;
 	    height: 0.5rem;color: #666;padding:0 0.05rem;
@@ -479,9 +486,6 @@ header{
 		    padding: 0 0.05rem;
 		}
 }
-
-
-
 footer{
 	position: absolute;top:0.5rem;z-index: 999;
 }

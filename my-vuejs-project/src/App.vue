@@ -9,7 +9,6 @@
 <script type="text/javascript" src="./assets/js/zepto.jsv1.2.0.js"></script>
 
 <script>
-	
   import Page1 from './components/list_page1';
   var rempx = document.documentElement.clientWidth / 4.2;
 	document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";

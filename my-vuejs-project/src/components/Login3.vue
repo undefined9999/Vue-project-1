@@ -1,41 +1,48 @@
 <template>
 	<div class="solt">
 		<div class="loadingDiv" v-if="loading"></div>
-	<header>
-    <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
-    <div class="title">
-        <div class="center">找回密码</div>
-    </div>
-    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
-</header>
- <common-footer v-if="flag"></common-footer>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		<header>
+	    	<router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		    <div class="title">
+		        <div class="center">找回密码</div>
+		    </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	    	<router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
+		</header>
+ 		<common-footer v-if="flag"></common-footer>
  <!---------------------------------------------->
-        <div class="mui-content">
-    <div class="rl-main">
-        <label class="rl-cell">
-            <input class="txtin" type="tel" placeholder="手机号" v-model="username">
-            <mt-button type="danger" >获取验证码</mt-button>
-        </label>
-        <label class="rl-cell">        
-            <input class="txtin" type="password" placeholder="验证码" v-model="password">            
-        </label>
-        <mt-button type="danger" size="normal" @click.native="login">
-        	确定
-        </mt-button>
-    </div>
-</div>
+	        <div class="mui-content">
+			    <div class="rl-main">
+			        <label class="rl-cell">
+			            <input class="txtin" type="tel" placeholder="手机号" v-model="username">
+			            <mt-button type="danger" >获取验证码</mt-button>
+			        </label>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+			        <label class="rl-cell">        
+			            <input class="txtin" type="password" placeholder="验证码" v-model="password">            
+			        </label>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+			        <mt-button type="danger" size="normal" @click.native="login">
+			        	确定
+			        </mt-button>
+			    </div>
+			</div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
 			<aside>
-		<p class="iconfont icon-QQ"></p>
-		<p class="iconfont icon-icon-test-copy"></p>
+				<p class="iconfont icon-QQ"></p>
+				<p class="iconfont icon-icon-test-copy"></p>
 			</aside>
- </div>
+ 	</div>
 </template>
 
 <script>
-	import { Indicator } from 'mint-ui';
-	import Footer from '@/components/Footer'
+import { Indicator } from 'mint-ui';
+import Footer from '@/components/Footer'
 import axios from 'axios';
 import { Toast } from 'mint-ui';
+
 export default {
 	name: "login2",
 	data: function() {
@@ -72,9 +79,9 @@ export default {
 			Indicator.close();
 		},1000)
 	},
-components: {
-      'common-footer' : Footer
-  },
+	components: {
+	      'common-footer' : Footer
+	  },
 }
 </script>
 
