@@ -1,7 +1,9 @@
 <template>
 	<div class="cart">
 		<header class="mui-bar mui-bar-nav mui-bar-nav-primary" style="background: #CA0E25;">
-			<a href=""></a>
+			<router-link to="/index" class="left_">
+				<a href="" style="color: #FFFFFF;">&lt;</a>
+			</router-link>
 			<div class="title">
 				<div class="center" style="color: #FFFFFF;">我的购物车</div>
 			
@@ -14,14 +16,17 @@
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
-				<span id="count-price" class="price">243</span>
+				<span id="count-price" class="price" v-if="$store.state.cart[0] == null">0.00</span>
+				<span id="count-price" class="price" v-if="$store.state.cart[0] != null">{{$store.state.cart[0].detail.mobile_price}}</span>
 				元
 			</div>
-			<span class="btn primary">
+			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
+			<span class="btn primary" style="width:100%">
 				去结算(
 				<span>{{$store.state.cart.length}}</span>
 				)
 			</span>
+			</router-link>
 		</div>
 		
 		<!--购物车为空-->
@@ -33,7 +38,8 @@
 				<div class="desc">购物车还没有任何商品</div>
 			
 			<div class="btn-wrap">
-				<a href="" class="ui-btn-primary ui-btn-md" style="color: #FFFFFF;padding:9px;font-size: 0.14rem;line-height: 0.3rem;border-radius: 0.05rem;">去逛逛</a>
+				<router-link :to="{name : 'List2' , params : {Attr_id : 1001,Id : 2}}" id="defBack" class="back-btn mui-action-back">
+				<a href="" class="ui-btn-primary ui-btn-md" style="color: #FFFFFF;padding:9px;font-size: 0.14rem;line-height: 0.3rem;border-radius: 0.05rem;">去逛逛</a></router-link>
 			</div>
 			</div>
 			
@@ -60,7 +66,7 @@
 								</button>
 							</div>
 							<div class="del" @click="del()">
-								<i class="iconfont icon-fangdajing"></i>
+								<i class="iconfont icon-iconset0316"></i>
 							</div>
 						</div>
 						
@@ -118,8 +124,8 @@ export default {
 			list: [],
 			app_imgs:{},
 			hots:[],
-			count:1
-			
+			count:1,
+			detail:[]		
 		}
 	},
 	mounted() {
@@ -145,7 +151,7 @@ export default {
 		myur(){
 //			this.$store.state.cart = null;
 
-			console.log(this.$store.state.cart);
+			console.log( this.$store.state.cart);
 		},
 		del(){ 	       			
 			
@@ -157,7 +163,7 @@ export default {
             }).then(action => {
                 if (action == 'confirm') {
                     console.log('确定');
-        			 this.$store.dispatch("delToCartA");
+        			this.$store.dispatch("delToCartA");
                 }
             }).catch(err => {
                 if (err == 'cancel') {
@@ -172,11 +178,16 @@ export default {
 			if(this.count < 1){
 				this.count = 1;
 			}
+			
         },
         plus(i) {
            this.count++;
-			this.$emit('input', {res: this.count, other: '++'})			
+			this.$emit('input', {res: this.count, other: '++'})		
+			for(var i = 0;i<$store.state.cart.detail.length;i++){
+				this.detail.push($store.state.cart.detail[i])
+			}
         }
+       
 	
 	}
 }

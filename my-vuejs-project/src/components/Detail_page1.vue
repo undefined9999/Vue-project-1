@@ -1,12 +1,16 @@
-<template>
+<template>			
 	<div class="detail">
+		<div class="loadingDiv" v-if="loading"></div>
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
-				<span id="count-price" class="price">243</span> 元
-			</div>			
-				<span class="btn warning" @click="addToCart()">加入购物车</span>			
-			<a href="javascript:;" class="btn primary">立即购买</a>
+				<span id="count-price" class="price" v-if="cart.detail">{{cart.detail.mobile_price}}</span> 元
+			</div>		
+				<span class="btn warning" @click="addToCart()">加入购物车</span>
+			
+			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
+			<a href="javascript:;" class="btn primary" style="height: 100%;width: 100%;">立即购买</a>
+			</router-link>
 		</div>
 		<div class="mui-content">
 			<!--banner-->
@@ -284,8 +288,6 @@
 																																															
 			</div>
 						
-			<!--遮罩层-->
-			<div class="mui-popup-backdrop mui-active" v-if="flag"></div>
 
 		</div>
 			
@@ -305,6 +307,7 @@
 
 <script type="text/javascript" src="../assets/js/zepto.jsv1.2.0.js"></script>
 <script>
+	import { Indicator } from 'mint-ui';
 	import axios from 'axios';
 	import Footer from '@/components/Footer'
 	import { TabContainer, TabContainerItem } from 'mint-ui';
@@ -333,10 +336,20 @@
 				searchBarFixed:false,
 				cart : ' ',
 				count:1,
-				flag:false
+				flag:false,
+				loading:false
 
 			}
 		},
+		beforeMount(){
+			this.loading = true;
+			Indicator.open({
+				text :'',
+				spinnerType:'triple-bounce'
+			});
+			
+  			
+  		},
 		mounted() {
 			var Id = this.$route.params.Id;
 			this.getData();			
@@ -353,10 +366,10 @@
 /*********也许你喜欢的列表***********/				
 					this.list = response.data.data.detail.images;
 					this.app_imgs = response.data.data.detail.description;
-					var imgs = response.data.data.detail.description
-					imgs = imgs.replace(/770px/g,"100%")
+					var imgs = response.data.data.detail.description;
+					imgs = imgs.replace(/770px/g,"100%");
 //					console.log(imgs)
-					this.app_imgs = imgs
+					this.app_imgs = imgs;
 //					console.log(typeof this.app_imgs)	
 //					console.log( response.data.data.hots[1])
 					for(var i = 0;i<response.data.data.hots.length;i++){
@@ -364,6 +377,8 @@
 					}
 					
 				})
+				Indicator.close();
+				
 		},
 		 methods: {
             infiniteHandler($state) {
@@ -379,6 +394,8 @@
 					for(var i = 0;i<response.data.data.comments.data.length;i++){
 						this.user_pl.push(response.data.data.comments.data[i])
 					}	
+					this.loading = false;
+					 Indicator.close();
 				
 				})		
 			},
@@ -468,4 +485,14 @@ header{
 footer{
 	position: absolute;top:0.5rem;z-index: 999;
 }
+.loadingDiv {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		background: rgba(0,0,0,0.5);
+		z-index: 999;
+	}
+
 </style>
