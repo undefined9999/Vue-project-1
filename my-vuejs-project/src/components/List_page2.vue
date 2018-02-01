@@ -1,5 +1,6 @@
 <template>
 	<div class="page2">
+
 		<!--遮罩层-->
 		<div class="loadingDiv" v-if="loading"></div>
 		<!--header-->
@@ -12,10 +13,12 @@
 				</span>
 				<input type="text" name="" id="" value="请输入关键字" placeholder="请输入关键字"/>
 			</div>
-			<a class="dao_hang">	
+			<span class="dao_hang" @click="foots()">	
 				导航
-			</a>
+			</span>
 		</header>
+		<common-footer v-show="flag"></common-footer>
+		<!---->
 		<section>
 			<div class="main_top">
 				<p>
@@ -52,7 +55,7 @@
 						</span>
 					</a>
 				</p>	
-			</div>
+			</div> 
 			
 
 			<div class="main_bot" id="container">
@@ -60,15 +63,16 @@
 				<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
 				<ul>
 					<li v-for="item in list">
-						<router-link to="/deatail1">
+						<router-link :to="{name : 'Detail' , params : {Id : item.id}}">
 							<img :src="item.img" v-lazy.container="item.img"/>
 							<p>{{item.title}}</p>
 							<p>￥{{item.price}}</p>
 						</router-link>
 					</li>
 				</ul>
+				<infinite-loading @infinite="infiniteHandler"></infinite-loading>
 				<!--    下拉加载更多      -->
-				<infinite-loading @infinite="infiniteHandler"></infinite-loading>  
+				  
 				</mt-loadmore>
 			</div>
 			<aside>
@@ -102,7 +106,7 @@
 
 
 <script>
-	
+import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
 
@@ -123,13 +127,11 @@ export default {
 			 itemss : [],
 			 showFlag : false,
 			 tiao : "",
-			 loading : false
+			 loading : false,
+			 flag : false
 		}
 		
 	},
-	components: {
-   		 InfiniteLoading,
- 	 },
 	methods: {
 	//  向下加载更多
 	    infiniteHandler($state) {
@@ -147,7 +149,6 @@ export default {
 				for(var i = 0;i<len;i++){
 					this.list.push(response.data.data.goodsList.data[i])
 				}	
-			
 			})		
 		},
 		dian_dian(loading) {
@@ -169,7 +170,6 @@ export default {
 				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
 				$(this).css("color","#fff").siblings().css("color","#666")
 			})
-			
 		},
 		tiao1(tiao){
 			var Attr_id = this.$route.params.Attr_id;
@@ -286,17 +286,18 @@ export default {
 			this.showFlag = !this.showFlag;			
 		}
  	},
- 	beforeMount() {
- 		this.loading = true;
- 		Indicator.open({
- 			text : "",
- 			spinnerType : "triple-bounce"
- 		})
- 	},
+	beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+ 	 },
 	mounted() {
 		var Attr_id = this.$route.params.Attr_id;
 		var Id = this.$route.params.Id;
-		axios.get(`/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=${Attr_id}_${Id}&sort=`)
+		var tiao = this.tiao;
+		axios.get(`/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=${Attr_id}_${Id}&sort=${tiao}`)
 		.then((res)=>{
 //			console.log(res)
 			this.hua = res.data.data.category;
@@ -314,7 +315,36 @@ export default {
 			Indicator.close();
 		})
 	},
-
+	methods: {
+		//  向上加载更多
+	    loadTop() {
+//	      console.log("loadTop");
+	      setTimeout(() => {
+	        Toast('数据重新加载完成');
+	        this.$refs.loadmore.onTopLoaded();
+	      }, 3000)
+	    },
+	    loadBottom() {
+	      
+	    },
+//	    into_mast () {
+//			$(".list_1").click(function(){
+//				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
+//				$(this).css("color","#fff").siblings().css("color","#666")
+//			})
+//	    },
+	    hideMenu () {
+			this.showFlag = !this.showFlag;			
+		},
+    	foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			}
+  },
+  components:{
+  	InfiniteLoading,
+  	'common-footer' : Footer
+  }
 }
 
 
@@ -325,4 +355,8 @@ export default {
 
 <style scoped lang="scss">
 	@import '../assets/css/List_page2.scss';
+	footer{
+	position: absolute;top:0.5rem;
+	transform:all 2s;
+}
 </style>

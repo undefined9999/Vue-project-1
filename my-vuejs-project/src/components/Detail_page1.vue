@@ -1,23 +1,39 @@
 <template>
+	
+			
 	<div class="detail">
+		<div class="loadingDiv" v-if="loading">
+			玩命加载中......
+		</div>
 		<div class="mui-bar detail-action-bar">
 			<div class="info">
 				合计：
-				<span id="count-price" class="price">243</span> 元
+				<span id="count-price" class="price" v-if="cart.detail">{{cart.detail.mobile_price}}</span> 元
 			</div>
 			
-				<span class="btn warning" @click="addToCart()">加入购物车</span>
+				<span class="btn warning" @click.stop="addToCart()">加入购物车</span>
 			
-			
-			<a href="javascript:;" class="btn primary">立即购买</a>
+			<router-link :to="{name : 'Login'}" id="defBack" class="back-btn mui-action-back" style="width:30%">
+			<a href="javascript:;" class="btn primary" style="height: 100%;width: 100%;">立即购买</a>
+			</router-link>
 		</div>
 		<div class="mui-content">
 			<!--banner-->
 			<div class="banner-out detail-focus" style="margin: 0;">
+				<!--//////////////////////////////////-->
+					<header>
+	    <router-link :to="{name : 'List2' , params : {Attr_id : 1001,Id : 2}}" id="defBack" class="back-btn mui-action-back">&lt;</router-link>
+	    <div class="title">
+	        <div class="center">商品详情</div>
+	    </div>
+	    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
+	</header>
+	<common-footer v-if="flag"></common-footer>
+	<!------------------------------------------->
 				<div class="banner-box">
 					<mt-swipe :auto="4000">
 						<mt-swipe-item v-for="item in list" :key="item.id">
-							<img :src="item" style="width: 100%;height: 100%;" :key="item.id"/>
+							<img :src="item" style="width: 100%;height: 100%;" />
 						</mt-swipe-item>
 					</mt-swipe>
 
@@ -63,11 +79,11 @@
 						<div class="key">数量：</div>
 						<div class="cnt flex-col">
 							<div class="mui-numbox" data-numbox-min="1" data-numbox-max="30">
-								<button class="mui-btn mui-btn-numbox-minus" type="button" disabled style="width: 0.3rem;">
+								<button class="mui-btn mui-btn-numbox-minus" type="button"  style="width: 0.3rem;" @click="minus()">
 									<i class="iconfont icon-reduce" >-</i>
 								</button>
-								<input class="mui-input-numbox" disabled style="float: left;width: 0.3rem;" value="1">
-								<button class="mui-btn mui-btn-numbox-plus" type="button" style="float: right;width: 0.3rem;">
+								<span class="mui-input-numbox" disabled style="float: left;width: 0.3rem;" >{{count}}</span>
+								<button class="mui-btn mui-btn-numbox-plus" type="button" style="float: right;width: 0.3rem;" @click="plus()">
 									<i class="iconfont icon-plug" >+</i>
 								</button>
 							</div>
@@ -123,22 +139,22 @@
 													
 											</div>
 											<div style="width: 100%;">
-											<img :src ="item"  v-for="item in add_img1" style="width: 100%;height: 100%;"/>
+											<img :src ="item"  v-for="item in add_img1" :key="item.id" style="width: 100%;height: 100%;"/>
 											</div>
 											
 										</div>
 									</div>
 								</div>
 				  		          	
-				         
+				        
 				    		  </mt-cell>  
 								 <!--ui-box-rec-->
 							<div class="ui-box ui-box-rec">
 								<div class="rec-hd">也许你还喜欢</div>
 								<div class="rec-list mui-row" style="height: 100%; width: 100%;background: #FFFFFF;z-index: 10;">
 								
-									<div class="mui-col-xs-6 col" v-for="item in hots">
-										<a href="" class="item" style=" border: 1px solid #CCCCCC;">
+									<div class="mui-col-xs-6 col" v-for="item in hots" :key="item.id">
+										<a href="javascript:;" class="item" style=" border: 1px solid #CCCCCC;">
 											<img :src ="item.img" style="width: 100%;"/>
 											<div class="cnt">
 												<div class="name" >{{item.title}}</div>
@@ -157,9 +173,9 @@
 					        <mt-cell>
 					          	<div class="mod-infinite" >
 					          		<div class="detail-reply">
-					          			<div class="reply-item ui-border-b" v-for="item in user_pl">
+					          			<div class="reply-item ui-border-b" v-for="item in user_pl" :key="item.id">
 					          			
-					          				<div class="avatar" >
+					          			<div class="avatar" >
 					          					<a href="">
 					          						<div class="img">
 					          							<img  :src="item.item_img">
@@ -274,6 +290,7 @@
 					    </div>  
 																																															
 			</div>
+						
 
 		</div>
 			
@@ -293,10 +310,12 @@
 
 <script type="text/javascript" src="../assets/js/zepto.jsv1.2.0.js"></script>
 <script>
+	import { Indicator } from 'mint-ui';
 	import axios from 'axios';
+	import Footer from '@/components/Footer'
 	import { TabContainer, TabContainerItem } from 'mint-ui';
 	import InfiniteLoading from 'vue-infinite-loading';
-
+	import { MessageBox } from 'mint-ui';
 	export default {
 		name: "Detail_page1",
 		data: function() {
@@ -318,34 +337,50 @@
 				user_pl:[],
 				page:0,
 				searchBarFixed:false,
-				cart : ' '
+				cart : ' ',
+				count:1,
+				flag:false,
+				loading:false
+
 			}
 		},
+		beforeMount(){
+		
+			this.loading = true;
+			Indicator.open({
+				text :'',
+				spinnerType:'triple-bounce'
+			});
+		},
 		mounted() {
-			this.getData();
-			window.addEventListener('scroll', this.handleScroll);			
-			axios.get('/api/product/index?id=12396')			
+			
+			var Id = this.$route.params.Id;
+			this.getData();			
+			window.addEventListener('scroll', this.handleScroll);	
+			
+			axios.get(`/api/product/index?id=${Id}`)			
 				.then((response) => {
 //					console.log(response.data.data.detail.description);
 /*************详情动态信息************/
-					console.log(response.data.data)
+//					console.log(response.data.data)
 					this.cart = response.data.data;
-//					console.log(this.cart.detail);
+//					console.log(this.cart);
 					
 /*********也许你喜欢的列表***********/				
 					this.list = response.data.data.detail.images;
 					this.app_imgs = response.data.data.detail.description;
-					var imgs = response.data.data.detail.description
-					imgs = imgs.replace(/770px/g,"100%")
+					var imgs = response.data.data.detail.description;
+					imgs = imgs.replace(/770px/g,"100%");
 //					console.log(imgs)
-					this.app_imgs = imgs
+					this.app_imgs = imgs;
 //					console.log(typeof this.app_imgs)	
 //					console.log( response.data.data.hots[1])
 					for(var i = 0;i<response.data.data.hots.length;i++){
 						this.hots.push(response.data.data.hots[i])
 					}
-					
-				})				
+				})
+				Indicator.close();
+				
 		},
 		 methods: {
             infiniteHandler($state) {
@@ -361,6 +396,8 @@
 					for(var i = 0;i<response.data.data.comments.data.length;i++){
 						this.user_pl.push(response.data.data.comments.data[i])
 					}	
+					this.loading = false;
+					 Indicator.close();
 				
 				})		
 			},
@@ -381,16 +418,53 @@
 				window.removeEventListener('scroll', this.handleScroll)
 			}, 
 			addToCart() {
-				var cart = this.cart;
-				// 启动action
-				// dispatch("action的名字")
-				this.$store.dispatch("addToCartA", cart);
-				this.$router.push({path : "/cart"})
-			}
+				/*************弹出框***********/
+				MessageBox.confirm('', {
+	                message: '已加入购物车，是否去结算?',
+	                title: '提示',
+	                confirmButtonText: '确定',
+	                cancelButtonText: '取消'
+                      }).then(action => {
+                      	
+                      	
+                if (action == 'confirm') {
+                	var goods = this.cart;
+                	console.log(this.cart)
+//                  console.log('确定');
+		this.$store.dispatch("addToCartA", goods);
+					this.$nextTick(function(){
+                     this.$router.push({path : "/cart"});
+                	     })              
+                }
+            }).catch(err => {
+                if (err == 'cancel') {
+//                  console.log('取消');
+                }
+            })
+			
+				
+			},
+			minus(i) {
+	       //实现减少购买数量  
+           this.count--;
+				this.$emit('input', {res: this.count, other: '--'})
+				if(this.count < 1){
+					this.count = 1;
+				}
+       		},
+	        plus(i) {
+	           this.count++;
+				this.$emit('input', {res: this.count, other: '++'})					
+	        },
+			foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			},
 			
 		  },
 		 components: {
 		    InfiniteLoading,
+		    'common-footer' : Footer
 		 },
 		
 	}
@@ -400,5 +474,27 @@
 	@import '../assets/css/swiper.min.css';
 	@import '../assets/css/iconfont/iconfont2.css';
 	@import '../assets/css/Detail_page1.scss';
-	
+	header{
+	    display: flex;align-items: center;
+	   justify-content: space-between;
+	    height: 0.5rem;color: #666;padding:0 0.05rem;
+	    background-color: #fff;width:100%;
+ 	.back-btn {
+		    display: block;
+		    padding: 0 0.05rem;
+		}
+}
+footer{
+	position: absolute;top:0.5rem;z-index: 999;
+}
+.loadingDiv {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		background: rgba(0,0,0,0.5);
+		z-index: 999;
+	}
+
 </style>

@@ -82,8 +82,8 @@
 
 
 <script>
-	
-import { Indicator } from 'mint-ui'; // 加载中
+
+import { Indicator } from 'mint-ui';
 import Footer from '@/components/Footer'
 var rempx = document.documentElement.clientWidth / 4.2;
 document.getElementsByTagName('html')[0].style.fontSize = rempx + "px";	
@@ -95,7 +95,7 @@ export default {
 		return {
 			items : null,
 			list : [],
-			loading : false
+			loading: false
 		}
 	},
 	 components: {
@@ -180,7 +180,19 @@ export default {
 			})	
 		}		
 	},
+	 beforeMount(){	 
+		    if(location.href.indexOf('#reloaded')==-1){
+		    location.href=location.href+"#reloaded";
+		    location.reload();  
+   				 }
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+  },
 	mounted() {
+			
 		$("#foot li:nth-of-type(2) a").css("color","#ca0e25");
 		axios.get("/api/product/category")
 		.then((res)=>{

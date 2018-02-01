@@ -1,54 +1,58 @@
 <template>
 	<div class="solt">
-	<header>
-    <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
-    <div class="title">
-        <div class="center">注册</div>
-    </div>
-    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
-</header>
- <common-footer v-if="flag"></common-footer>
+		<div class="loadingDiv" v-if="loading"></div>
+		<header>
+		    <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
+		    <div class="title">
+		        <div class="center">注册</div>
+		    </div>
+		    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
+		</header>
+ 		<common-footer v-if="flag"></common-footer>
  <!---------------------------------------------->
-        <div class="mui-content">
-    <div class="rl-main">
-        <label class="rl-cell">
-            <div class="ico">
-            	<img src="http://www.dinghuapai.cn/wap/img/rl/mobile.png" alt="">
-            </div>
-            <input class="txtin" type="tel" placeholder="手机号" v-model="username">
-        </label>
-        <label class="rl-cell">
-            <div class="ico">
-            	<img src="http://www.dinghuapai.cn/wap/img/rl/yzm.png" alt="">          
-           </div>
-            <input class="txtin" type="password" placeholder="验证码" v-model="password">
-            <div class="">
-            <mt-button type="danger">获取验证码</mt-button>
-            </div>
-        </label>
-        <mt-button type="danger" size="normal" @click.native="login">
-        	立即登录
-        </mt-button>
-    </div>
-</div>
+	        <div class="mui-content">
+			    <div class="rl-main">
+			        <label class="rl-cell">
+			            <div class="ico">
+			            	<img src="http://www.dinghuapai.cn/wap/img/rl/mobile.png" alt="">
+			            </div>
+			            <input class="txtin" type="tel" placeholder="手机号" v-model="username">
+			        </label>
+			        <label class="rl-cell">
+			            <div class="ico">
+			            	<img src="http://www.dinghuapai.cn/wap/img/rl/yzm.png" alt="">          
+			            </div>
+			            <input class="txtin" type="password" placeholder="验证码" v-model="password">
+			            <div class="">
+			            	<mt-button type="danger">获取验证码</mt-button>
+			            </div>
+			        </label>
+			        <mt-button type="danger" size="normal" @click.native="login">
+			        	立即登录
+			        </mt-button>
+			    </div>
+			</div>
 			<aside>
-		<p class="iconfont icon-QQ"></p>
-		<p class="iconfont icon-icon-test-copy"></p>
+				<p class="iconfont icon-QQ"></p>
+				<p class="iconfont icon-icon-test-copy"></p>
 			</aside>
- </div>
+ 	</div>
 </template>
 
 <script>
-	import Footer from '@/components/Footer'
+import { Indicator } from 'mint-ui';
+import Footer from '@/components/Footer'
 import axios from 'axios';
 import { Toast } from 'mint-ui';
+
 export default {
 	name: "login2",
 	data: function() {
 		return {
 			 flag: false,
 			 username :[],
-			 password : []
+			 password : [],
+			 loading:false
 		}
 	},
 	methods:{
@@ -64,12 +68,23 @@ export default {
 				});
 		}	
 	},
+	beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+     },
 	mounted() {
-	
+		setTimeout(()=>{
+			this.loading = false;
+			Indicator.close();
+		},1000)
+	        
 	},
-components: {
-      'common-footer' : Footer
-  },
+	components: {
+	      'common-footer' : Footer
+	  },
 }
 </script>
 

@@ -1,86 +1,93 @@
 <template>
 	<div class="solt">
-	<header>
-		<!--{{$store.state.cart.length}}-->
-    <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
-    <div class="title">
-        <div class="center">个人中心</div>
-    </div>
-    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
-</header>
- <common-footer v-if="flag"></common-footer>
- <!---------------------------------------------->
-	<div class="mui-content">
- 		<div class="index-user">
-	        <div class="avatar">
-	            <img src="http://www.dinghuapai.cn/wap/img/uc/dhp.png" alt=""/>
+		<div class="loadingDiv" v-if="loading"></div>
+			<header>
+			    <router-link to="/login" id="defBack" class="back-btn mui-action-back"><</router-link>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+			    <div class="title">
+			        <div class="center">个人中心</div>
+			    </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+			    <router-link to="" class="btn right topmenu-btn" ><span @click="foots()">导航</span></router-link>  
+			</header>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+				<common-footer v-if="flag"></common-footer>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		<div class="mui-content">
+	 		<div class="index-user">
+		        <div class="avatar">
+		            <img src="http://www.dinghuapai.cn/wap/img/uc/dhp.png" alt=""/>
+		        </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		        <div class="name" >
+		        {{$store.state.username}}
+		        </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		        <div class="level" >普通会员</div>
+	    	</div>
+		</div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	    <div class="index-order">
+	        <div class="group">
+	                <div class="flex-col">
+	                    <router-link to="" class="item">
+	                        <img src="http://www.dinghuapai.cn/wap/img/uc/o1.png" class="ico"/>
+	                        <div class="label">待付款</div>
+	                    </router-link>
+	                </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	                <div class="flex-col">
+	                    <router-link to="" class="item">
+	                        <img src="http://www.dinghuapai.cn/wap/img/uc/o2.png" class="ico"/>
+	                        <div class="label">待配送</div>
+	                    </router-link>
+	                </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	                <div class="flex-col">
+	                    <router-link to="" class="item">
+	                        <img src="http://www.dinghuapai.cn/wap/img/uc/o3.png" class="ico"/>	
+	                        <div class="label">待评价</div>
+	                    </router-link>
+	                </div>
 	        </div>
-	        <div class="name" >
-	        {{$store.state.username}}</div>
-	        <div class="level vip" v-if="userinfo.cost>=500">
-	        	黄金会员
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	        <div class="all">
+	            <i class="arrow"></i>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+	            <router-link to="" class="item">
+	                <img src="http://www.dinghuapai.cn/wap/img/uc/o4.png" alt="" class="ico"/>
+	                <div class="label">全部订单</div>
+	            </router-link>
 	        </div>
-	        <div class="level" >普通会员</div>
-    	</div>
-	</div>
-	<!------------------------------------------------------>
-    <div class="index-order">
-        <div class="group">
-                <div class="flex-col">
-                    <router-link to="" class="item">
-                        <img src="http://www.dinghuapai.cn/wap/img/uc/o1.png" class="ico"/>
-
-                        <div class="label">待付款</div>
-                    </router-link>
-                </div>
-                <div class="flex-col">
-                    <router-link to="" class="item">
-                        <img src="http://www.dinghuapai.cn/wap/img/uc/o2.png" class="ico"/>
-
-                        <div class="label">待配送</div>
-                    </router-link>
-                </div>
-                <div class="flex-col">
-                    <router-link to="" class="item">
-                        <img src="http://www.dinghuapai.cn/wap/img/uc/o3.png" class="ico"/>
-
-                        <div class="label">待评价</div>
-                    </router-link>
-                </div>
-        </div>
-        <div class="all">
-            <i class="arrow"></i>
-            <router-link to="" class="item">
-                <img src="http://www.dinghuapai.cn/wap/img/uc/o4.png" alt="" class="ico"/>
-
-                <div class="label">全部订单</div>
-            </router-link>
-        </div>
-    </div>
- <!--------------------------------------------------------->
- <div class="index-menu mui-row ui-border-tb">
-  	<div class="col mui-col-xs-3" v-for="item in menu" :key="item.id">
-        <router-link to="" class="item">
-            <img class="ico" :src="item.img">
-            <div class="label">{{item.name}}</div>
-        </router-link>
-    </div>
- </div>
- 	<mt-button type="danger" size="large" @click.native="logout">
-	        	退出
-    </mt-button>
- <!--------------------------------------------------------->
-	<aside>
-		<p class="iconfont icon-QQ"></p>
-		<p class="iconfont icon-icon-test-copy"></p>
-	</aside>
- </div>
+	    </div>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		 <div class="index-menu mui-row ui-border-tb">
+		  	<div class="col mui-col-xs-3" v-for="item in menu" :key="item.id">
+		        <router-link to="" class="item">
+		            <img class="ico" :src="item.img">
+		            <div class="label">{{item.name}}</div>
+		        </router-link>
+		    </div>
+		 </div>
+		 <!---->
+	 	<mt-button type="danger" size="large" @click.native="logout">
+		        	退出
+	    </mt-button>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+		<aside>
+			<p class="iconfont icon-QQ"></p>
+			<p class="iconfont icon-icon-test-copy"></p>
+		</aside>
+ <!--------------------------------------------------------------------------------------------------------------------------------->
+ 	</div>
 </template>
 
 <script>
-	import Footer from '@/components/Footer'
+import { Indicator } from 'mint-ui';
+import Footer from '@/components/Footer'
 import axios from 'axios';
 import { Toast } from 'mint-ui';
+
 export default {
 	name: "login4",
 	data: function() {
@@ -97,7 +104,8 @@ export default {
 			 {'id': 7,'name':'修改密码',  'img':'http://www.dinghuapai.cn/wap/img/uc/pwd.png'},
 			 {'id': 8,'name':'在线咨询',  'img':'http://www.dinghuapai.cn/wap/img/uc/kefu.png'},
 			 {'id': 9,'name':'关于订花派','img':'http://www.dinghuapai.cn/wap/img/uc/dhp.png'}
-			 	]
+			 	],
+			 	loading:false
 		}
 	},
 	methods:{
@@ -115,12 +123,22 @@ export default {
 				});
 		}
 	},
+	beforeMount(){
+	 	this.loading = true;
+  		Indicator.open({
+			  text: '',
+			  spinnerType: 'triple-bounce'
+			});
+     },
 	mounted() {
-		
+			setTimeout(()=>{
+			this.loading = false;
+			Indicator.close();
+		},1000)
 	},
-components: {
-      'common-footer' : Footer
-  },
+	components: {
+	      'common-footer' : Footer
+	  },
 }
 </script>
 
