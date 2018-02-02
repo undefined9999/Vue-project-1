@@ -106,7 +106,7 @@
 	            .then((response) => {
 	            	var name = this.username;
 	            	var that = this;
-	             console.log(response);
+//	             console.log(response);
 	                Toast({
 	              	  message:response.data.message,
 	                  position: 'bottom',

@@ -135,7 +135,7 @@ export default {
 	},
 	mounted() {
 		this.commonprice();
-		console.log(this.carts)
+//		console.log(this.carts)
 		axios.get('/api/product/index?id=12396')			
 				.then((response) => {					
 /*********也许你喜欢的列表***********/				

@@ -26,19 +26,19 @@ function delTolocal(state) {
 }
 
 const mutations = {
+//	登录验证
 	setUserName: function(state, username) {
-		state.username = username;
-		// 持久化：保存数据
+		state.username = username;		
 		saveTolocal(state);
 	},
 	addToCart: function(state, goods_info) {
+		商品添加
 		state.cart.push(goods_info);
-		// 持久化：保存数据
 		saveTolocal(state);
 	},
 	delToCart: function(state) {
+		//商品删除
 		state.cart.pop();
-		// 持久化：保存数据
 		delTolocal(state);
 	},
 	huaName : function(state,hua_name){

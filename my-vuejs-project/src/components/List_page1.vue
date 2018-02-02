@@ -112,7 +112,7 @@ export default {
   		// vuex数据管理
   		huaName(ite){
   			this.$store.dispatch("huaNameA", ite);
-  			console.log(ite)
+//			console.log(ite)
   		},
   		// 列表scrolltop事件
 		height_tiao1(){

@@ -129,8 +129,7 @@ export default {
 			 tiao : "",
 			 loading : false,
 			 flag : false
-		}
-		
+		}		
 	},
 	methods: {
 	//  向下加载更多
@@ -151,15 +150,15 @@ export default {
 				}	
 			})		
 		},
-		dian_dian(loading) {
+		dian_dian() {
 			this.loading = true;
 	 		Indicator.open({
 	 			text : "",
 	 			spinnerType : "triple-bounce"
 	 		})
-		},
-		//   默认列表
+		},		
 		into_mast1() {
+			//   默认列表
 			this.dian_dian();
 //			console.log(tiao)
 			this.tiao = 'def-desc';
@@ -184,14 +183,14 @@ export default {
 				this.loading = false;
 				Indicator.close();
 			})	
-		},
-		//  价格列表
+		},		
 		into_mast2() {
+			//  价格列表
 			this.dian_dian();
 //			console.log(tiao)
 			this.tiao = 'price-asc'
 			setTimeout(()=>{
-				console.log(this)
+//				console.log(this)
 				this.tiao2(this.tiao)			
 			},10)
 			$(".list_1").click(function(){
@@ -204,7 +203,7 @@ export default {
 			var Id = this.$route.params.Id;
 			axios.get(`/api/product/goods-list?state=goodsList&page=1&cid=1029&filter=${Attr_id}_${Id}&sort=${tiao}`)
 			.then((res)=>{
-				console.log(res)
+//				console.log(res)
 				this.hua = res.data.data.category;
 				this.lei = res.data.data.selected;
 				this.list = res.data.data.goodsList.data;
@@ -212,9 +211,9 @@ export default {
 				this.loading = false;
 				Indicator.close();
 			})
-		},
-		//  销量列表
+		},		
 		into_mast3() {
+			//  销量列表
 			this.dian_dian();
 //			console.log(tiao)
 			this.tiao = 'sale-desc'
@@ -241,9 +240,9 @@ export default {
 				this.loading = false;
 				Indicator.close();
 			})
-		},
-		//  最新列表
+		},		
 		into_mast4() {
+			//  最新列表
 			this.dian_dian();
 //			console.log(tiao)
 			this.tiao = 'new-desc'
@@ -270,9 +269,9 @@ export default {
 				this.loading = false;
 				Indicator.close();
 			})	
-		},
-		//  向上加载更多
+		},		
 	    loadTop() {
+	    	//  向上加载更多
 	      console.log("loadTop");
 	      setTimeout(() => {
 	        Toast('数据重新加载完成');
@@ -284,7 +283,28 @@ export default {
 	    },
 	    hideMenu () {
 			this.showFlag = !this.showFlag;			
-		}
+		},				
+	    loadTop() {
+	    	//  向上加载更多
+//	      console.log("loadTop");
+	      setTimeout(() => {
+	        Toast('数据重新加载完成');
+	        this.$refs.loadmore.onTopLoaded();
+	      }, 3000)
+	    },
+//	    into_mast () {
+//			$(".list_1").click(function(){
+//				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
+//				$(this).css("color","#fff").siblings().css("color","#666")
+//			})
+//	    },
+	    hideMenu () {
+			this.showFlag = !this.showFlag;			
+		},
+    	foots : function(){
+				this.flag =! this.flag;
+	//			console.log(this.flag)
+			}
  	},
 	beforeMount(){
 	 	this.loading = true;
@@ -315,32 +335,6 @@ export default {
 			Indicator.close();
 		})
 	},
-	methods: {
-		//  向上加载更多
-	    loadTop() {
-//	      console.log("loadTop");
-	      setTimeout(() => {
-	        Toast('数据重新加载完成');
-	        this.$refs.loadmore.onTopLoaded();
-	      }, 3000)
-	    },
-	    loadBottom() {
-	      
-	    },
-//	    into_mast () {
-//			$(".list_1").click(function(){
-//				$(this).css("background","#ca0e25").siblings().css("background","#f4f4f4")
-//				$(this).css("color","#fff").siblings().css("color","#666")
-//			})
-//	    },
-	    hideMenu () {
-			this.showFlag = !this.showFlag;			
-		},
-    	foots : function(){
-				this.flag =! this.flag;
-	//			console.log(this.flag)
-			}
-  },
   components:{
   	InfiniteLoading,
   	'common-footer' : Footer
